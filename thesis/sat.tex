@@ -1,0 +1,163 @@
+\section{Reduction to \probThreeSat}
+\label{section:sat}
+
+In the previous section we saw that~\probBook is \NP-complete.
+This implies that we cannot expect to solve a general book embedding instance in polynomial time. 
+But we still want to be able to check some instances, \eg to find counterexamples in special
+cases as in \myref{section:matchings}. We, therefore, make it the goal
+of this section to give a super-polynomial time algorithm for deciding book embeddability.
+
+In order to achieve this, we express \probBook as a satisfiability problem of a Boolean formula.
+The translation immediately yields a Boolean formula in 3-\CNF. That is,
+the formula is a conjunction of disjunctions of literals (positive or negative variables) and each
+disjunction contains at most~3 literals. The problem of deciding satisfiability for
+these Boolean formulae is called~\probThreeSat and has been studied extensively.
+
+\newProb{\probThreeSat}{A 3-\CNF Boolean formula \bool{f}.}{Is~\bool{f} satisfiable?}
+
+Although \probThreeSat was the first problem to be proven \NP-complete~\cite{Cook71}, there
+are \SAT-solvers that handle many instances occurring in practice in reasonable times. One that
+has scored well in several contests is~\mytt{minisat}~\cite{minisat03}. We use it to 
+check the resulting formulae for some instances in \myref{section:matchings}.
+
+Now we derive the translation of the total order formulation of~\probBook from \myref{lemma:constraints}
+into a Boolean formula. Let $\bigl((V, E_1),\dotsc, (V, E_k)\bigr)$ be the book embedding 
+instance and label the vertices $V = \range{n}$ without loss of generality. 
+
+We have to express the total order~$<$ as a set of Boolean variables. 
+It is natural to introduce a variable
+\bool{v(i, j)} for the statement $i < j$ for all $i, j \in V$. 
+
+Then we have to build a 3-\CNF formula that rephrases the stipulation that~$<$ is a
+strict total order and that the book constraints are fulfilled. We can achieve this by forming the conjunction of the following formulae.
+
+\paragraph{Strict total order}
+
+That~$<$ is a strict total order means, by definition, that it is asymmetric, irreflexive, transitive
+and total:
+
+\begin{description}
+\item[irreflexive] For each vertex~$i \in V$ the formula~$i < i$ is false. 
+We get~$\lnot v(i, i)$. (n~clauses)
+\item[asymmetric and total] For each unordered pair of distinct vertices~$i, j \in V$ exactly one
+of~$i < j$ or~$j < i$ is true. We get~$v(i,j) \xor v(j,i) \equiv \bigl(v(i,j) \lor v(j,i)\bigr) \land \bigl(\lnot v(i,j) \lor \lnot v(j,i)\bigr)$. (two~clauses for each of the $\binom{n}{2}$~unordered pairs)
+\item[transitive] For each triple~$i, j, k \in V$ of vertices, if~$i < j$ and $j < k$ are
+true, then also~$i < k$. We get~$\bigl(v(i, j) \land v(j, k)\bigr) \Rightarrow v(i, k) \equiv \lnot v(i, j)
+\lor \lnot v(j, k) \lor v(i, k)$. (one clause for each of the $n(n-1)(n-2)$~ordered triples of
+distinct vertices)
+\end{description}
+
+\paragraph{Book constraints}
+
+For each unordered pair of different edges~$e_1 := \{a, b\}, e_2 := \{c, d\} \in E_i$, we have to take the book 
+constraint from \myref{def:book-constraint} into account. The constraint says exactly that~$c$ is between~$a$
+and~$b$ if and only if~$d$ is between~$a$ and~$b$ as well as that~$a$ is between~$c$ and~$d$
+if and only if~$b$ is between~$c$ and~$d$. 
+
+% We rephrase it as follows: If one
+%vertex of one of the two edges lies between the vertices of the other, then the other 
+%vertex of the first edge also lies between the vertices of the second. Furthermore, we have to
+%consider all possible orders of $a$~and~$b$ respectively $c$~and~$d$.
+
+That is, if we choose one of the edges $e_1$ or~$e_2$ as edge~$e_O := \{w, x\}$ and the other as
+edge~$e_I := \{y, z\}$, we get the following equivalence:
+\[
+%\bigwedge_{\substack{e_O, e_I \in \{e_1, e_2\}\\e_I \neq e_O, e_I =: \{y, z\}}} \bigwedge_{\substack{w, %x \in e_O\\w \neq x}} \Bigl(v(w, y) \land v(y, x) \Leftrightarrow v(w, z) \land v(z, x)\Bigr) 
+\bigl(v(w, y) \land v(y, x) \Leftrightarrow v(w, z) \land v(z, x)\bigr) \tag{1}
+\]
+Exchanging the vertices $y$ and~$z$ does not change the resulting clauses, while
+exchanging the vertices $w$ and~$x$ does. Thus, there are two choices to make. Firstly,
+which of $e_1$ and~$e_2$ gets the name~$e_O$ and which gets the
+name~$e_I$ (two possibilities). Secondly, which incident vertex of the edge~$e_O$ gets the
+name~$w$ and which gets the name~$x$ (two possibilities).
+
+Since the formula~(1) is equivalent to the \CNF-formula $\bigl(\lnot v(w, y) \lor \lnot v(y, x) \lor v(w, z)\bigr) \land\allowbreak\bigl(\lnot v(w, y) \lor \lnot v(y, x) \lor v(z, x)\bigr) \land \bigl(\lnot v(w, z) \lor \lnot v(z, x) \lor v(w, y)\bigr) \land \bigl(\lnot v(w, z) \lor \lnot v(z, x) \lor v(y, x)\bigr)$, we get $\text{2}\cdot \text{2} \cdot \text{4} = \text{16}$ clauses for each of
+the $\sum_{i=1}^{k} \binom{|E_i|}{2}$ unordered pairs of edges.
+
+We actually do not need the clauses for both choices of~$e_O$. Once the \SAT-formulae for one choice have been added, the constraints for the other choice immediately follow.
+
+We now show this observation. Let $e_1 := \{a, b\}, e_2 := \{c, d\}$ be edges and
+assume we have the \SAT-formulae of type~(1) with $e_O = e_1$ as well as the \SAT-formulae for the asymmetry and totality. 
+We now show $v(c, a) \land v(a, d) \Rightarrow v(c, b) \land v(b, d)$. The other
+instances of~(1) with~$e_O = e_2$ can be proven analogously. 
+
+Assume that $v(c, a) \land v(a, d)$ is true.
+If~$v(d, b)$ is true, we can infer $v(a, c)$ by $v(a, d) \land v(d, b) \Leftrightarrow
+v(a, c) \land v(c, b)$ (the formula~(1) with $e_O = \{a, b\}$, $w = a$ and $x = b$) which contradicts $v(c, a)$ because of the asymmetry constraint. 
+That is, $v(b, d)$~must be true by the asymmetry and totality.
+In the
+same manner we can show~$v(c, b)$. Thus, the assumption implies $v(c, b) \land v(b, d)$,
+as desired.
+
+This small optimisation saves half of the clauses,
+\ie we only need eight~clauses for each pair of edges.
+
+\paragraph{Fixed minimum}
+
+From \myref{lemma:symmetry} we know that cyclic shifts preserve the validity of~$<$.
+To help the \SAT-solver, we can, therefore, assume that~$1$ is the
+smallest vertex and add the clauses~$v(1, j)$ for all $j \in V$ with $j \neq 1$. They
+comprise another~$n-1$ clauses.
+
+\begin{table}[tb]
+\centering
+
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lll}
+
+\textbf{Axiom} & \textbf{3-\CNF formula} & \textbf{Number of clauses}\\
+\toprule
+Irreflexive          & $\lnot v(i, i)$ & $n$ \\
+\midrule
+Asymmetric and total & $\bigl(v(i,j) \lor v(j,i)\bigr) \land \bigl(\lnot v(i,j) \lor \lnot v(j,i)\bigr)$ & $2\binom{n}{2}$\\
+                     & for all distinct unordered pairs $i, j \in V$ \\
+\midrule
+Transitive           & $\lnot v(i, j) \lor \lnot v(j, k) \lor v(i, k)$ & $n(n-1)(n-2)$\\ 
+                     & for all ordered triples $i, j, k \in V$ where\\
+                     & $i$, $j$~and $k$ are pairwise distinct\\
+\midrule
+Book embedding       & $\bigl(\lnot v(w, y) \lor \lnot v(y, x) \lor v(w, z)\bigr)$ & $16\cdot\sum_{i=1}^{k} \binom{|E_i|}{2}$\\
+                     & $\land \bigl(\lnot v(w, y) \lor \lnot v(y, x) \lor v(z, x)\bigr)$ \\
+                     & $\land \bigl(\lnot v(w, z) \lor \lnot v(z, x) \lor v(w, y)\bigr)$ \\
+                     & $\land \bigl(\lnot v(w, z) \lor \lnot v(z, x) \lor v(y, x)\bigr)$ \\
+                     & for all distinct $e_O = \{w, x\}$, \\
+                     & $e_I = \{y, z\} \in E_i$ and all $i \in \range{k}$ \\
+                     & where it matters which edge is\\
+                     & assigned to $e_O$ and which to $e_I$\\
+\midrule
+Book embedding       & $\bigl(\lnot v(w, y) \lor \lnot v(y, x) \lor v(w, z)\bigr)$ & $8\cdot\sum_{i=1}^{k} \binom{|E_i|}{2}$\\
+(optimised)          & $\land \bigl(\lnot v(w, y) \lor \lnot v(y, x) \lor v(z, x)\bigr)$ \\
+                     & $\land \bigl(\lnot v(w, z) \lor \lnot v(z, x) \lor v(w, y)\bigr)$ \\
+                     & $\land \bigl(\lnot v(w, z) \lor \lnot v(z, x) \lor v(y, x)\bigr)$ \\
+                     & for all distinct $e_O = \{w, x\}$,\\
+                     & $e_I = \{y, z\} \in E_i$ and all $i \in \range{k}$\\
+                     & where it does not matter which edge is\\
+                     & assigned to $e_O$ and which to $e_I$\\
+\midrule
+Fixed minimum         & $v(1, j)$ for all $j \in \bigl(V \setminus \{1\}\bigr)$ & $n - 1$\\
+\bottomrule
+\end{tabular}}
+
+\caption[\CNF translation of \probBook]{The 3-\CNF formulae corresponding to \probBook}
+\label{table:sat}
+\end{table}
+
+The clauses we get are summarised in \myref{table:sat}. They
+provide us with a polynomial-time reduction from~$\probBook$ to~$\probThreeSat$.
+The number of edges $|E_i|$ is linear in $|V|$ for all~$i \in \range{k}$ since~$(V, E_i)$ is an outerplanar graph.
+Thus, we get~$\OO\bigl(|V|^3 + k|V|^2\bigr)$ clauses.
+
+\begin{theorem}
+Let~$I := (V, E_1, \dotsc, E_k)$ be a~$\probBook$ instance. There is a $\OO\bigl(|V|^3 + k|V|^2\bigr)$~time reduction
+to an equivalent $\probThreeSat$ instance with~$\OO\bigl(|V|^3 + k|V|^2\bigr)$ clauses.
+%$\probBook \leq_P \probThreeSat$
+\end{theorem}
+%\begin{myproof}
+%The translated constraints in \myref{table:sat} which we can write down
+%in polynomial time directly express the book embedding problem as 3-\prob{cnf} formula.
+%\end{myproof}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "thesis"
+%%% End: 

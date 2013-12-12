@@ -1,0 +1,85 @@
+%% conclusion.tex
+%%
+
+%% ==================
+\chapter{Conclusion}
+\label{ch:conclusion}
+%% ==================
+
+In this thesis we considered the book
+embedding problem where the assignment of edges to pages has already been fixed.
+
+We proved that \probBook is \NP-complete
+for a linear number of pages in \myref{chapter:complexity}, even if the pages are matchings. 
+In the same chapter we 
+showed how \probBook can still be solved in super-polynomial
+time by expressing it with 3-\CNF-formulae.
+Though matchings are a nicely restricted case that is already \NP-complete, 
+it is dissatisfying that we need an unbounded number of pages for our \NP-hardness proof.
+We would like to show \NP-completeness for a constant number of pages similar to the general book embedding problem,
+which is \NP-complete for two pages~\cite{Bernhart79}. The problem \probBook may be \NP-complete for the next smaller case
+of three pages, but proving or disproving that seems to be quite difficult.
+
+The remainder of the work was concerned with a variety of special cases
+and restrictions of \probBook in \myref{chapter:special}. We first considered pages 
+containing connected graphs and
+showed that embeddability can be decided in linear time in this case by
+representing all possible book embeddings using a \PQ-tree. 
+%With the same approach we can reduce a general book embedding instance to a \probPQ instance.
+
+Next, we dealt with the very opposite with regards to connectivity:
+the pages are disjoint perfect matchings. We showed that bipartiteness is
+necessary for embeddability in this case and provided bipartite examples and counterexamples for
+all numbers of pages except for three pages. We computed that the smallest counterexample for three pages has at least~20 vertices
+and at most~28. When two matchings form a cycle, we found a smallest
+counterexample of order~28. This is too large
+for us to be able to infer anything useful from it. One obvious extension of this case is to find some structure
+in the counterexamples even though they are large and, maybe, get a better necessary
+condition or a good sufficient condition. The counterexample for three pages may also yield a clue on
+whether \probBook is \NP-complete for three pages.
+
+The problem that we considered after that was to restrict the order of the vertices on the spine
+by a \Q-tree. We showed that the book constraints turn into simple constraints
+on the \Q-tree in this case. This allowed us to solve the problem in quadratic time. The most interesting
+continuation of this line of thought is to make the restriction more in accordance with its motivation.
+That is, to use \PT-trees as in the reduction of \SEFECON to a 2-page \probPTree instance by Angelini et.\,al.~\cite{angelini11}. We already argued that
+this does not make the problem easier than \probBook since a \PT-tree can represent
+all permutations on its leaves. Still, maybe we can get a solution for just two pages
+which is all that is needed for solving \SEFECON.
+
+Finally, we varied the book embedding problem by allowing multiple spines. We showed
+that this case is equivalent to a restricted 2-page \probPTree instance. Although this did not efficiently solve the problem, it provided
+us with several future extensions: 
+%Provide a polynomial time algorithm for  \probPTree and get a solution of \probMul, show the \NP-com\-plete\-ness of \probMul and get the \NP-completeness of \probPTree or provide a polynomial time algorithm for \probMul and get an efficient algorithm for a special case of \probPTree. 
+\begin{itemize}
+\item Provide a polynomial time algorithm for  \probPTree and get an efficient solution of \probMul.
+\item Prove the \NP-completeness of \probMul and get the \NP-completeness of \probPTree.
+\item Provide a polynomial time algorithm for \probMul and get an efficient algorithm for a special case of \probPTree.
+\end{itemize}
+The last
+extension may also give some
+helpful pointers on how to approach the general \probPTree problem.
+
+All in all, the most important continuation of this work is to find the computational
+complexity of two problems: \probBook for
+a constant number of pages and \probPTree. In the following we
+list possible approaches and sub-problems that could possibly be of use, ordered decreasingly by how likely
+we believe the approach to succeed or how useful the sub-problem is:
+
+\begin{enumerate}
+\item Prove the \NP-completeness of \probBook for a constant number of pages:
+\begin{enumerate}
+\item Compute a smallest bipartite counterexample of \probThreeMatching.
+\item Show that \probThreeMatching is \NP-complete by looking at the structure of \myref{figure:two_cycles} or derive a necessary and sufficient condition from it
+that is efficiently checkable.
+%\item Show that \probPQ is \NP-complete for a constant number of \PQ-trees.
+\end{enumerate}
+
+\item Find the computational complexity of \probPTree:
+\begin{enumerate}
+\item Give an efficient algorithm for \probMul or show that it is \NP-complete.
+%\item Show that \probMul is \NP-complete.
+\item Solve \SEFECON.
+\item Generalise the approach of \myref{section:trees} to \PT-trees.
+\end{enumerate}
+\end{enumerate}

@@ -1,0 +1,15 @@
+\tikzsetnextfilename{t_k4}
+\begin{tikzpicture}
+
+\node[draw,circle] (a) {};
+\node[draw,circle,right of=a] (b) {};
+\node[draw,circle,below of=a] (c) {};
+\node[draw,circle,right of=c] (d) {};
+
+\draw (a) edge (b);
+\draw (c) edge (d);
+\draw[edge1] (a) edge (c);
+\draw[edge1] (b) edge (d);
+\draw[edge2] (a) edge (d);
+\draw[edge2] (b) edge (c);
+\end{tikzpicture}

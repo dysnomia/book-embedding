@@ -1,0 +1,74 @@
+\tikzsetnextfilename{t_topo1}
+\begin{tikzpicture}
+
+% ab || cd
+\begin{scope}
+\node (a) {a};
+\node[right of=a] (b) {b};
+\node[right of=b] (c) {c};
+\node[right of=c] (d) {d};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (b)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(c) + (d)$) + (0, -2em) $) {};
+\node (r) at ($ 0.5*($(c1) + (c2)$) + (0, -2em) $) {$ab||cd$};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (d.south);
+\draw (c2) edge[bend left] (c1);
+\end{scope}
+
+% ac || bd
+\begin{scope}[xshift=5cm]
+\node (a) {a};
+\node[right of=a] (b) {c};
+\node[right of=b] (c) {b};
+\node[right of=c] (d) {d};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (b)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(c) + (d)$) + (0, -2em) $) {};
+\node (r) at ($ 0.5*($(c1) + (c2)$) + (0, -2em) $) {$ac||bd$};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (d.south);
+\draw (c2) edge[bend left] (c1);
+\end{scope}
+
+% ad || bc
+\begin{scope}[xshift=0cm,yshift=-3cm]
+\node (a) {a};
+\node[right of=a] (b) {d};
+\node[right of=b] (c) {b};
+\node[right of=c] (d) {c};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (b)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(c) + (d)$) + (0, -2em) $) {};
+\node (r) at ($ 0.5*($(c1) + (c2)$) + (0, -2em) $) {$ad||bc$};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (d.south);
+\draw (c2) edge[bend left] (c1);
+\end{scope}
+
+% abcd
+\begin{scope}[xshift=5cm,yshift=-3cm]
+\node (a) {a};
+\node[right of=a] (b) {b};
+\node[right of=b] (c) {c};
+\node[right of=c] (d) {d};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(b) + (c)$) + (0, -2em) $) {};
+\node (r) at ($ 0.5*($(c1) + (c1)$) + (0, -2em) $) {$abcd$};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c1) edge (c.south);
+\draw (c1) edge (d.south);
+\end{scope}
+
+\end{tikzpicture}

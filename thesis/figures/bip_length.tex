@@ -1,0 +1,20 @@
+\tikzsetnextfilename{t_bip_length}
+\begin{tikzpicture}
+
+\node (0) {$0$};
+\node[right of=0] (p1) {\dots};
+\node[right of=p1] (v) {$v$};
+\node[right of=v,node distance=4em] (p2) {\dots};
+\node[right of=p2,node distance=4em] (w) {$w$};
+\node[right of=w] (p3) {\dots};
+\node[right of=p3] (n) {$n - 1$};
+
+\draw (v) edge[bend left] (w);
+\draw ($ (v) + (0, -1em) $) edge[<->] node[below=0.2em] {$d_1$} ($ (w) + (0, -1.0em) $);
+\draw ($ (v) + (0, -1em) $) edge[<-] ($ (0) + (0, -1em) $);
+\draw ($ (0) + (0, -1em) $) edge[out=180,in=180] ($ 0.5*($ (0) + (n) $) + (0, -3em) $);
+\draw ($ 0.5*($ (0) + (n) $) + (0, -3em) $) edge[out=0,in=0] ($ (n) + (0, -1em) $);
+\draw ($ (n) + (0, -1em) $) edge[->] ($ (w) + (0, -1em) $);
+\node at ($ 0.5*($ (0) + (n) $) + (0, -4em) $) {$d_2$};
+
+\end{tikzpicture}

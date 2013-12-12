@@ -1,0 +1,157 @@
+\tikzsetnextfilename{t_topo_b_ac_d}
+\begin{tikzpicture}
+
+\begin{scope}
+\node (b) {b};
+\node[right of=b] (a) {a};
+\node[right of=a] (c) {c};
+\node[right of=c] (d) {d};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (c)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(b) + (d)$) + (0, -4em) $) {};
+
+\draw (b) edge [bend left] (a);
+\draw (c) edge [bend left] (d);
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (c.south);
+\draw (c2) edge (b.south);
+\draw (c2) edge (d.south);
+\draw (c2) edge (c1);
+\end{scope}
+
+\begin{scope}[xshift=5cm]
+\node (b) {b};
+\node[right of=b] (c) {c};
+\node[right of=c] (a) {a};
+\node[right of=a] (d) {d};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (c)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(b) + (d)$) + (0, -4em) $) {};
+
+\draw (b) edge [bend left] (a);
+\draw (c) edge [bend left] (d);
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (c.south);
+\draw (c2) edge (b.south);
+\draw (c2) edge (d.south);
+\draw (c2) edge (c1);
+\end{scope}
+
+\begin{scope}[xshift=10cm]
+\node (d) {d};
+\node[right of=d] (a) {a};
+\node[right of=a] (c) {c};
+\node[right of=c] (b) {b};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (c)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(b) + (d)$) + (0, -4em) $) {};
+
+\draw (a) edge [bend left] (b);
+\draw (d) edge [bend left] (c);
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (c.south);
+\draw (c2) edge (b.south);
+\draw (c2) edge (d.south);
+\draw (c2) edge (c1);
+\end{scope}
+
+\begin{scope}[xshift=15cm]
+\node (d) {d};
+\node[right of=d] (c) {c};
+\node[right of=c] (a) {a};
+\node[right of=a] (b) {b};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (c)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(b) + (d)$) + (0, -4em) $) {};
+
+\draw (a) edge [bend left] (b);
+\draw (d) edge [bend left] (c);
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (c.south);
+\draw (c2) edge (b.south);
+\draw (c2) edge (d.south);
+\draw (c2) edge (c1);
+\end{scope}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Line 2
+
+% \begin{scope}[yshift=-3cm]
+% \node (a) {a};
+% \node[right of=a] (b) {b};
+% \node[right of=b] (d) {d};
+% \node[right of=d] (c) {c};
+
+% \node[rectangle, draw] (c1) at ($ 0.5*($(a) + (c)$) + (0, -2em) $) {};
+% \node[rectangle, draw] (c2) at ($ 0.5*($(b) + (d)$) + (0, -4em) $) {};
+
+% \draw (a) edge [bend left] (b);
+% \draw (d) edge [bend left] (c);
+
+% \draw (c1) edge (b.south);
+% \draw (c1) edge (d.south);
+% \draw (c2) edge (a.south);
+% \draw (c2) edge (c.south);
+% \draw (c2) edge (c1);
+% \end{scope}
+
+% \begin{scope}[xshift=4cm,yshift=-3cm]
+% \node (a) {a};
+% \node[right of=a] (d) {d};
+% \node[right of=d] (b) {b};
+% \node[right of=b] (c) {c};
+
+% \node[rectangle, draw] (c1) at ($ 0.5*($(a) + (c)$) + (0, -2em) $) {};
+% \node[rectangle, draw] (c2) at ($ 0.5*($(b) + (d)$) + (0, -4em) $) {};
+
+% \draw (a) edge [bend left] (b);
+% \draw (d) edge [bend left] (c);
+
+% \draw (c1) edge (b.south);
+% \draw (c1) edge (d.south);
+% \draw (c2) edge (a.south);
+% \draw (c2) edge (c.south);
+% \draw (c2) edge (c1);
+% \end{scope}
+
+% \begin{scope}[xshift=8cm,yshift=-3cm]
+% \node (c) {c};
+% \node[right of=c] (b) {b};
+% \node[right of=b] (d) {d};
+% \node[right of=d] (a) {a};
+
+% \node[rectangle, draw] (c1) at ($ 0.5*($(a) + (c)$) + (0, -2em) $) {};
+% \node[rectangle, draw] (c2) at ($ 0.5*($(b) + (d)$) + (0, -4em) $) {};
+
+% \draw (b) edge [bend left] (a);
+% \draw (c) edge [bend left] (d);
+
+% \draw (c1) edge (b.south);
+% \draw (c1) edge (d.south);
+% \draw (c2) edge (a.south);
+% \draw (c2) edge (c.south);
+% \draw (c2) edge (c1);
+% \end{scope}
+
+% \begin{scope}[xshift=12cm,yshift=-3cm]
+% \node (c) {c};
+% \node[right of=c] (d) {d};
+% \node[right of=d] (b) {b};
+% \node[right of=b] (a) {a};
+
+% \node[rectangle, draw] (c1) at ($ 0.5*($(a) + (c)$) + (0, -2em) $) {};
+% \node[rectangle, draw] (c2) at ($ 0.5*($(b) + (d)$) + (0, -4em) $) {};
+
+% \draw (b) edge [bend left] (a);
+% \draw (c) edge [bend left] (d);
+
+% \draw (c1) edge (b.south);
+% \draw (c1) edge (d.south);
+% \draw (c2) edge (a.south);
+% \draw (c2) edge (c.south);
+% \draw (c2) edge (c1);
+% \end{scope}
+\end{tikzpicture}

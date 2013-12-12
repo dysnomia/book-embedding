@@ -1,0 +1,24 @@
+\chapter{Algorithmic Complexity}
+\label{chapter:complexity}
+
+The book embedding problem  without fixed page assignments  \probBookNormal is \NP-complete. For two pages
+Bernhart~\cite{Bernhart79} showed that the problem is the same
+as determining whether the graph is \emph{sub-hamiltonian}, \ie a subgraph of a planar
+graph with a Hamiltonian cycle. This implies that \probBookNormal is \NP-complete by a result of Widgerson's~\cite{Widgerson82},
+which states that the Hamiltonian circuit problem for maximal planar graphs is \NP-complete.
+
+Since the two page case with fixed partitions is solvable in linear time~\cite{two-page-09},
+we see that fixing the partitions significantly changes the book embedding problem. Is \probBook even
+\NP-complete? We answer this question in the affirmative in the first
+half of this chapter (\myref{section:np-complete}),
+but, unfortunately, only for an unbounded number of pages. 
+
+Thus, we know that \probBook is probably not efficiently solvable. In spite of that, we
+want to test some specific instances in \myref{section:matchings}.
+For this reason, in the second half of
+this chapter~(\myref{section:sat}) we show how \probBook can be solved in super-polynomial time  by reducing it to \probThreeSat with some optimisations.
+We chose the \probThreeSat problem since there are solvers for it that work well
+on instances occurring in practice, even though \probThreeSat is \NP-complete.
+
+\input{np_complete}
+\input{sat}

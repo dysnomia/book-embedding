@@ -1,0 +1,541 @@
+% Based on thesisclass.cls of Timo Rohrberg, 2009
+\documentclass{thesisclass}
+% ----------------------------------------------------------------
+% Thesis - Main document
+% ----------------------------------------------------------------
+
+% Use extended TeX functionality
+\usepackage{etex}
+
+% Low level settings
+\errorcontextlines=0
+
+
+%  \renewcommand*{\chapterformat}{%
+%    \llap{%
+%      % Following line is the original definition
+%      \chapappifchapterprefix{\ }\thechapter\autodot\enskip
+%    }%
+%  }
+%
+%\renewcommand*{\othersectionlevelsformat}[1]{%
+%  \llap{%
+%    % Following line is the original definition
+%    \csname the#1\endcsname\autodot\enskip
+%  }%
+%}
+
+%% ---------------------------------
+%% | Information about the thesis  |
+%% ---------------------------------
+
+\newcommand{\myname}{Daniel Hoske}
+\newcommand{\mytitleone}{Book Embedding with Fixed Page Assignments}
+\newcommand{\mytitle}{Book Embedding with Fixed Page Assignments}
+\newcommand{\mytitletwo}{}
+\newcommand{\myinstitute}{Institute of Theoretical Computer Science}
+
+\newcommand{\reviewerone}{Prof.\,Dr. Dorothea Wagner}
+\newcommand{\reviewertwo}{Prof.\,Dr. Peter Sanders}
+\newcommand{\advisorone}{Dr. Ignaz Rutter}
+\newcommand{\advisortwo}{Dipl.-Inform. Thomas Bl\"asius}
+
+\newcommand{\mydate}{\today}
+\newcommand{\timestart}{1st June 2012}
+\newcommand{\timeend}{30th September 2012}
+
+\hypersetup{
+ pdfauthor={\myname},
+ pdftitle={\mytitleone},
+ pdfsubject={\mytitleone},
+ pdfkeywords={Book embedding, matchings, PQ-tree, planar, simultaneous embedding},
+ pdfproducer={pdflatex},
+ pdfcreator={pdflatex},
+ colorlinks=true,
+ linkcolor=red,
+ citecolor=red
+}
+
+% Good PDF settings
+\input glyphtounicode.tex
+\input glyphtounicode-cmr.tex
+\pdfgentounicode=1
+
+% Print
+%\usepackage[x-1a]{pdfx}
+% Archive
+%\usepackage[a1-b]{pdfx}
+
+\makeatletter
+\newcommand\mynobreak{\par\nobreak\@afterheading}
+\makeatother
+
+%% ---------------------------------
+%% | Commands                      |
+%% ---------------------------------
+
+
+
+%% --------------------------------
+%% | Settings for word separation |
+%% --------------------------------
+% Help for separation:
+% In german package the following hints are additionally available:
+% "- = Additional separation
+% "| = Suppress ligation and possible separation (e.g. Schaf"|fell)
+% "~ = Hyphenation without separation (e.g. bergauf und "~ab)
+% "= = Hyphenation with separation before and after
+% "" = Separation without a hyphenation (e.g. und/""oder)
+
+% Describe separation hints here:
+\hyphenation{
+% Pro-to-koll-in-stan-zen
+% Ma-na-ge-ment  Netz-werk-ele-men-ten
+% Netz-werk Netz-werk-re-ser-vie-rung
+% Netz-werk-adap-ter Fein-ju-stier-ung
+% Da-ten-strom-spe-zi-fi-ka-tion Pa-ket-rumpf
+% Kon-troll-in-stanz
+}
+
+
+%% ------------------------
+%% |    Including files   |
+%% ------------------------
+% Only files listed here will be included!
+% Userful command for partially translating the document (for bug-fixing e.g.)
+\includeonly{
+titlepage,
+introduction,
+preliminaries,
+conclusion,
+appendix,
+complexity,
+symbols,
+special
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% My own additions            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% encoding
+\usepackage[LY1]{fontenc}
+\usepackage[utf8x]{inputenc}
+
+% typesetting
+\widowpenalty=10000
+\displaywidowpenalty=10000
+\clubpenalty=10000
+\raggedbottom
+
+% additional packages
+\usepackage{soul,array,booktabs,longtable,xcolor,colortbl,textcomp,%
+  calc,paralist,multicol,ragged2e,
+  fixltx2e,tabularx,setspace,xspace,pdfpages}
+\usepackage[xspace]{ellipsis}
+
+%\usepackage[figure]{hypcap}
+%\usepackage{algorithmic}
+
+% language
+\usepackage[english,ngerman]{babel}
+\selectlanguage{english}
+%\usepackage[english]{varioref}
+\usepackage[english,noabbrev,capitalise,nameinlink]{cleveref}
+
+% general index
+\usepackage{makeidx}
+\makeindex
+
+% math
+\usepackage{amsmath, amssymb, amsthm, thmtools}
+
+\newcommand{\range}[1]{\{1, \dotsc, #1\}}
+%\newcommand{\range}[1]{[#1]}
+
+\DeclareMathOperator{\Sym}{Sym}
+%\DeclareMathOperator{\reduce}{reduce}
+\setlength{\algomargin}{2em}	% Leave space for line numbering
+\newcommand{\reduce}{\text{\footnotesize\texttt{reduce}}}
+\newcommand{\mymod}{\bmod}
+
+%\renewcommand{\theequation}{\arabic{equation}}
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+
+\theoremstyle{plain}
+\newtheorem*{deflemma}{Definition + Lemma}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{*conjecture}{Conjecture}
+
+\declaretheoremstyle[%
+  spaceabove=-0.5em,%
+  spacebelow=0.5em,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  qed=\qedsymbol,%
+  headpunct={.}
+]{mystyle} 
+\declaretheorem[name={Proof},style=mystyle,unnumbered]{myproof}
+
+\usepackage{titlepage}
+
+% fonts
+\usepackage[stretch=9,shrink=9,step=3,protrusion=true,expansion=true,babel=true,final]{microtype}
+\usepackage{eulervm}
+\usepackage[opticals,onlytext,mathlf,minionint,fullfamily]{MinionPro}
+\usepackage[eqno,bib,enum,lineno]{tabfigures}
+\usepackage{MetaPro}
+\usepackage{LucidaSansTypewriterStd}
+
+\sodef\mysc{}{.00em}{.3em}{.4em}
+%\renewcommand{\cfttoctitlefont}{\normalfont\rmfamily\bfseries\upshape\Large}
+%\renewcommand{\scdefault}{ssc}
+\setkomafont{section}{\normalfont\rmfamily\bfseries\upshape\Large}
+\setkomafont{subsection}{\normalfont\rmfamily\bfseries\upshape\large}
+\setkomafont{subsubsection}{\normalfont\rmfamily\bfseries\upshape\normalsize}
+\setkomafont{pagehead}{\normalfont\rmfamily\mdseries\sscshape\scriptsize}
+\setkomafont{paragraph}{\normalfont\rmfamily\bfseries\upshape\normalsize}
+\setkomafont{descriptionlabel}{\normalfont\rmfamily\bfseries\upshape\normalsize}
+\setkomafont{caption}{\normalfont\rmfamily\mdseries\upshape\small}
+\setkomafont{sectioning}{\normalfont\rmfamily\bfseries\upshape\normalsize}
+
+% code blocks
+\newcommand{\code}[1]{{\footnotesize\texttt{#1}}}
+
+% paragraphs and lines
+\setstretch{1.05}
+
+% page
+
+\renewcommand{\chaptermark}[1]{\renewcommand{\leftmark}{\thechapter.\hspace{0.5em}\MakeLowercase{#1}}\renewcommand{\rightmark}{\thechapter.\hspace{0.5em}\MakeLowercase{#1}}}
+\renewcommand{\sectionmark}[1]{\renewcommand{\rightmark}{\thesection.\hspace{0.5em}\MakeLowercase{#1}}}
+\newcommand{\makepagefancy}{
+    \pagestyle{fancy}%
+%    \fancyhf{}%
+%    \fancyhead[RO]{\headfont\nouppercase{\rightmark}}	% Header for left page (odd)
+%    \fancyhead[LE]{\headfont\nouppercase{\leftmark}}	% Header for right page (even)
+%    \fancyfoot[C]{\thepage}%
+%    \renewcommand{\headrulewidth}{0.5pt}%
+%    \renewcommand{\footrulewidth}{0pt}%
+}
+%\makepagefancy
+%\fancypagestyle{plain}{%
+%\fancyhf{}						% No Header and Footer fields
+%\renewcommand{\headrulewidth}{0pt}
+%\renewcommand{\footrulewidth}{0pt}
+%\fancyfoot[C]{\thepage}
+%}
+\pagestyle{plain}
+
+% listings
+\usepackage{listings}
+\lstset{basicstyle=\scriptsize\ttfamily,numbers=left,%
+  numberstyle=\tiny\ttfamily,%
+  stepnumber=1,%
+  language=C++}
+
+%% My mathematical abbreviations
+
+% Sets
+\newcommand{\SN}{\mathbb{N}}
+\newcommand{\SH}{\mathbb{H}}
+\newcommand{\SC}{\mathbb{C}}
+\newcommand{\SR}{\mathbb{R}}
+\newcommand{\SZ}{\mathbb{Z}}
+
+% O-Notation
+\newcommand{\OO}{\mathcal{O}}
+
+%\renewcommand{\floatpagefraction}{0.5}
+
+% Algorithmic problems
+\newcommand{\prob}[1]{\textsc{#1}\xspace}
+\newcommand{\probTwoSat}{\prob{2-sat}}
+\newcommand{\probThreeSat}{\prob{3-sat}}
+\newcommand{\probQTree}{\prob{q-tree-book-embedding}}
+\newcommand{\probPTree}{\prob{p-tree-book-embedding}}
+\newcommand{\probQTreeSat}{\prob{q-tree-2-sat}}
+\newcommand{\probBookNormal}{\prob{not-fixed-book-embedding}}
+\newcommand{\probBook}{\prob{book-embedding}}
+\newcommand{\probBookConnected}{\prob{connected-book-embedding}}
+\newcommand{\probBetween}{\prob{betweenness}}
+\newcommand{\probBookOrder}{\prob{order-book-embedding}}
+\newcommand{\probMatching}{\prob{perfect-matchings-book-embedding}}
+\newcommand{\probNotMatching}{\prob{matchings-book-embedding}}
+\newcommand{\probPQ}{\prob{simultaneous-pq-ordering}}
+\newcommand{\probMul}{\prob{multiple-spine-embedding}}
+\newcommand{\probThreeMatching}{\prob{3-perfect-matchings-book-embedding}}
+
+% List of problems
+\newcommand*{\noaddvspace}{\renewcommand*{\addvspace}[1]{}}
+\addtocontents{lof}{\protect\noaddvspace}
+\addtocontents{lot}{\protect\noaddvspace}
+\addtocontents{loa}{\protect\noaddvspace}
+
+%\addtotoclist[prb]{prb}
+%\newcommand*{\listofprbname}{List of problems}
+%\newcommand*{\listofproblems}{\listoftoc{prb}}
+
+% Figure placement
+\newcommand{\placement}{}
+
+\makeatletter
+\newcommand{\algoFont}[1]{\textsf{#1}}
+\newcommand{\listline}{\@olddottedtocline{1}{1em}{2.3em}}
+\renewcommand{\l@algocf}{\listline}
+\renewcommand{\l@table}{\listline}
+\newcommand{\l@problem}{\listline}
+\renewcommand{\l@figure}{\listline}
+\makeatother
+
+%\addtoeachtocfile[prb]{TODO: Fix layout\\}
+%\addtoeachtocfile[prb]{\textbf{Problem} \hfill \textbf{page}\\}
+
+\newcommand{\newProb}[3]{%
+%TODO: Fix formatting\\%
+%\addtoeachtocfile[prb]{\protect\prob{#1}\dotfill\thepage\\}%
+\addcontentsline{lop}{problem}{\prob{#1}}
+%\addtocontents{lop}{\\}
+\vspace{-1em}\textbf{Problem: #1}\\%
+\emph{Given:} #2\\%
+%\emph{Answer the question:} #3%
+\emph{Question:} #3%
+
+}
+\newcommand{\newProbTwo}[3]{%
+%TODO: Fix formatting\\%
+%\addtoeachtocfile[prb]{\protect\prob{#1}\dotfill\thepage\\}%
+\addcontentsline{lop}{problem}{\prob{#1}}
+%\addtocontents{lop}{\\}
+\textbf{Problem: #1}\\%
+\emph{Given:} #2\\%
+%\emph{Answer the question:} #3%
+\emph{Question:} #3%
+
+}
+
+% Algorithm2e
+\makeatletter
+\newenvironment{Ualgorithm}[1][htpb]
+  {\setlength{\interspacetitleruled}{1ex}%
+   \setlength{\interspacealgoruled}{1ex}% 
+   \def\@algocf@post@ruled{\kern\interspacealgoruled\hrule  height\algoheightrule\kern6pt\relax}%
+   \SetAlgoCaptionLayout{centerline}%
+   \def\@algocf@capt@ruled{under}%
+   \def\algocf@caption@ruled{\box\algocf@capbox\kern\interspacetitleruled}% 
+    \begin{algorithm}[#1]}
+  {\end{algorithm}}
+\makeatother
+
+\SetAlFnt{\small\sf}
+\SetKw{KwRet}{return}
+\LinesNumbered
+\DontPrintSemicolon
+
+\newcommand{\myalgosize}[1]{#1}
+
+\newcommand{\mycomsty}[1]{\myalgosize{\textsf{#1}}}
+\SetCommentSty{mycomsty}
+\newcommand{\mykwsty}[1]{\myalgosize{\textbf{\textsf{#1}}}}
+\SetKwSty{mykwsty}
+\newcommand{\myargsty}[1]{\myalgosize{\textit{\textsf{#1}}}}
+\SetArgSty{myargsty}
+\newcommand{\myfuncsty}[1]{\myalgosize{\textsf{#1}}}
+\SetFuncSty{myfuncsty}
+%\newcommand{\mynumbersty}[1]{#1}
+%\SetNlSty{mynumbersty}
+
+% Boolean expression
+%\newcommand{\bool}[1]{{\footnotesize \texttt{#1}}}
+\newcommand{\bool}[1]{$#1$}
+\newcommand{\mytt}[1]{{\footnotesize \texttt{#1}}}
+\newcommand*\xor{\mathbin{\dot\vee}}
+
+% Abbreviations with correct spaces
+\newcommand{\ie}{\mbox{i.\,e.}\xspace}
+\newcommand{\eg}{\mbox{e.\,g.}\xspace}
+\newcommand{\TM}{TM\xspace}
+\newcommand{\NP}{NP\xspace}
+\newcommand{\SAT}{SAT\xspace}
+\newcommand{\PSPACE}{PSPACE\xspace}
+\newcommand{\CNF}{CNF\xspace}
+\newcommand{\SEFE}{\prob{sefe}}
+\newcommand{\SEFECON}{\prob{connected-sefe}}
+\newcommand{\PQ}{PQ\xspace}
+\newcommand{\Q}{Q\xspace}
+\newcommand{\PT}{P\xspace}
+
+% References
+\newcommand{\myref}[1]{\cref{#1}}
+
+% Tikz options
+\tikzstyle{dashdot} = [dash pattern=on .8pt off 3pt on 4pt off 3pt]
+\tikzstyle{edge1}=[red,dashed]
+\tikzstyle{edge2}=[blue,dotted]
+\tikzstyle{edge3}=[green,dashdot]
+\tikzstyle{every node}+=[inner sep=0.5mm,minimum size=2.00mm,node distance=3em,thick]
+\tikzstyle{every edge}+=[thick]
+\tikzstyle{every arc}+=[thick]
+\tikzstyle{every path}+=[thick]
+\usetikzlibrary{svg.path,calc,decorations.pathreplacing,positioning,backgrounds}
+\newdimen\XCoord
+\newdimen\YCoord
+\newcommand*{\ExtractCoordinate}[1]{\path #1; \pgfgetlastxy{\XCoord}{\YCoord};}%
+
+\newcommand{\drawedges}[2][\empty]{
+	\foreach \a/\b in {#2}{
+		\draw[#1] (\a) edge (\b);
+	}
+}
+
+% Semicircle through a and b
+\newcommand{\semicircle}[2]{%
+  \ExtractCoordinate{($ 0.5*($ (#2.north) - (#1.north) $) $)}
+  \draw[thick] ($ (#2.north) $) arc (0:180:\XCoord);
+}
+
+% Remove the following line for German text
+\selectlanguage{english}
+
+  
+\newcommand{\mysec}[1]{\vspace{1em}\textbf{\Large #1}}  
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Here, main documents begins %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\author{Daniel Hoske}
+\title{Book Embedding with Fixed Page Assignments}
+\date{20th November 2012}
+
+\makeatletter
+\renewcommand{\maketitle}{%
+% thispagestyle{plain}%
+  {\flushleft
+  {\bfseries\LARGE \@title}\par
+  \vskip-0.5em
+  {\small\@author, \@date}\par
+  \vspace{1em}}
+}
+\makeatother
+
+\usepackage{caption}
+
+\begin{document}
+
+\maketitle
+
+\mysec{Introduction}
+
+\begin{definition}
+\label{def:page-embed}
+A \emph{page embedding} of a graph $G = (V, E)$ is a planar embedding of~$G$ such that
+the vertices of $G$ lie on the \emph{real line} $\SR \times \{0\}$ and every edge lies in the \emph{upper half-plane} $\bigl\{(x, y) \in \SR^2\colon y > 0\bigr\}$, apart from the edge's endpoints.
+\end{definition}
+
+\begin{figure}[ht]
+\centering
+
+\begin{tikzpicture}
+
+% a < b < c
+\node (r) {};
+\node [right of=r] (a) {};
+\node [right of=a] (b) {};
+\node [right of=b] (c) {};
+
+\draw[edge1] (r) edge [bend right] (a);
+\draw[edge1] (b) edge [bend right] (c);
+\draw (a) edge [bend left]  (b);
+\draw(r) edge [bend left]  (c);
+ 
+\end{tikzpicture}
+\caption*{A book embedding with two pages.}
+\end{figure}
+
+\begin{definition}
+\label{def:book-embed}
+A \emph{book embedding} of graphs $G_1 = (V, E_1),\dotsc,\allowbreak G_k = (V, E_k)$ on the same set of vertices consists of page embeddings for each of the graphs that coincide in their vertex positions. 
+\end{definition}
+
+\newProb{\probBook}{A vertex set $V$ and edge sets $E_1,\dotsc, E_k \subseteq \binom{V}{2}$}
+{Is there a book embedding of $(V, E_1),\dotsc, (V, E_k)$?} 
+
+\begin{definition}\label{def:book-constraint}
+Let~$(V, E)$ be a graph and~$<$ a total order on~$V$.
+We call the condition that the suborder $a < c < b < d$ does not occur for any $\{a, b\}, \{c, d\} \in E$ the
+\emph{book constraint for~$E$}. If~$<$ fulfils the book constraint for~$E$, we say that it is a \emph{valid book order for~$E$}. 
+\end{definition}
+\begin{lemma}
+\label{lemma:constraints}
+There is a page embedding for $G = (V, E)$ if and only if there is a valid book order~$<$ 
+for~$E$.
+\end{lemma} 
+
+\begin{lemma}
+\label{lemma:symmetry}
+Let $(V, E_1),\dotsc, (V, E_k)$ be a book embedding instance with valid book order~$<\,\in \Sym(V)$.
+Then the cyclic shifts and the mirror image of~$<$ are also valid.
+\end{lemma} 
+
+\mysec{NP-completeness and connected pages}
+
+\newProbTwo{\probBetween}{A finite set $M := \range{n}$ and a set of ordered triples $C \subseteq M^3$.}
+{Is there a total ordering $<$ of $M$ such that either $a < b < c$ or $a > b > c$ occurs for all $(a, b, c) \in C$?}
+
+\begin{theorem}
+\label{lemma:np-hard}
+There is a polynomial time reduction from \probBetween to \probBook. Thus,
+\probBook is \NP-complete.
+\end{theorem} 
+
+\newProb{\probBookConnected}{A vertex set~$V$ and edge sets~$E_1,\dotsc,E_k \subseteq \binom{V}{2}$ such
+that the graphs~$(V, E_i)$ are connected for~$i \in \range{k}$.}{Is there
+a book embedding of $(V, E_1),\dotsc, (V,E_k)$?} 
+
+\begin{theorem}
+\probBookConnected can be solved in linear time.
+\label{theorem:connected}
+\end{theorem} 
+
+
+
+\begin{definition}\label{def:pq}
+A \emph{\PQ-tree} $T$~on $M := \range{n}$ is a rooted, ordered
+tree with leaves~$M$ and inner nodes either of type~$P$ (\tikz[scale=0.4,baseline={([yshift=+0.1em]current bounding box.south)}] \draw (0,0) circle (1em);)
+or type~$Q$ (\tikz[scale=0.75,baseline={([yshift=+0.1em]current bounding box.south)}] \draw (-0.5em, -0.5em) -- ++(1em, 0) -- ++(0, 1em) -- ++ (-1em,0) -- ++(0,-1em);).
+
+The tree represents a set of permutations $\pi(T) \subseteq \Sym(M)$ on its leaves as follows: The order of the children
+of a \PT-node can be permuted in any way, while the order of the children of a \Q-node can only be reversed. The set~$\pi(T)$ then consists exactly of the permutations of the leaves~$M$ that we can get
+by flipping the inner nodes in any of the specified valid ways.
+
+Let a \emph{\PT-tree} be a \PQ-tree containing only \PT-nodes as inner nodes and a \emph{\Q-tree} be a 
+\PQ-tree only containing \Q-nodes as inner nodes.
+\end{definition}
+
+\mysec{Disjoint perfect matchings}
+
+\newProbTwo{\probMatching}
+{Disjoint perfect matchings $E_1,\dotsc, E_k$ on a vertex
+set $V$.}{Is there a book embedding of $(V, E_1),\dotsc, (V, E_k)$?} 
+
+\begin{theorem}
+\label{lemma:bipartite}
+Let $I := (V, E_1,\dotsc, E_k)$ be an instance of \probMatching. If the graph
+$G := (V, E_1 \cup \dotsb \cup E_k)$ is not bipartite, it has no book embedding.
+\end{theorem} 
+
+\mysec{Tree on the vertices}
+
+\newProbTwo{\probQTree}{A \probBook instance $I$ with vertices $V$ and a \Q-tree~$T$ with leaves~$V$.}{Is there a total order $<\,\in \pi(T)$ solving $I$?} 
+
+\begin{theorem}
+\label{theorem:q-tree-book}
+\probQTree can be solved in quadratic time.
+\end{theorem} 
+
+\end{document}

@@ -1,0 +1,40 @@
+\begin{figure}[\placement]
+\centering
+\begin{tikzpicture}
+\path[use as bounding box] (-2,2) rectangle (8,-2.5);
+
+\tikzstyle{every node}+=[minimum size=0.5cm,thick]
+\tikzstyle{every path}+=[thick]
+% C4
+\node[] (a) {$a$};
+\node[right of=a] (b) {$b$};
+\node[below of=b] (c) {$c$};
+\node[left of=c] (d) {$d$};
+\node[left of=a, above of=a] (r) {$r$};
+
+\draw (a) edge (b) 
+      (b) edge (c) 
+      (c) edge (d) 
+      (d) edge (a);
+\draw[dashed] (r) edge (a)
+              (r) edge (b)
+              (r) edge (d)
+              (r) edge[out=270, in=270, min distance=6em] (c);
+\draw[very thick] ($ (r) + (-0.25,-1.25) $) -- ($ (r) + (1.0,0.0) $) node[right] {edge order};
+
+% PQ-tree
+\begin{scope}[xshift=5cm]
+\node[draw,rectangle,minimum size=.2cm] {}
+   child {node {$a$}}
+   child {node {$b$}}
+   child {node {$c$}}
+   child {node {$d$}};
+\end{scope}
+
+
+\end{tikzpicture}
+\label{figure:connected}
+\caption[Outerplanar embeddings of $C_4$]{The cycle $C_4$ has exactly the total orders in~$[abcd]$ and~$[dcba]$ as vertex orders around its outside face in an outerplanar
+embedding. Equivalently, it has these orders as edge orders around the new vertex~$r$ in a planar embedding
+of its extension graph.}
+\end{figure}

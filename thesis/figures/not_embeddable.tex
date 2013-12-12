@@ -1,0 +1,18 @@
+\tikzsetnextfilename{t_not_embeddable}
+\begin{tikzpicture}
+
+% l1 r1 l2 l3 r3 l4 r4
+
+\node (l1) {$l_1$};
+\node[right of=l1,node distance=4em] (r1) {$r_1$};
+\node[right of=r1,node distance=4em] (l2) {$l_2$};
+\node[right of=l2,node distance=4em] (l3) {$l_3$};
+\node[right of=l3,node distance=4em] (r3) {$r_3$};
+\node[right of=r3,node distance=4em] (l4) {$l_4$};
+\node[right of=l4,node distance=4em] (r4) {$r_4$};
+
+\drawedges[bend left]{l1/r1,l3/r3,l4/r4}
+\drawedges[edge1,bend left]{r1/l2,l3/r4,r3/l4}
+\drawedges[edge2,bend right]{l1/r3,r1/l3,l2/r4}
+\drawedges[edge3,bend right]{l1/r4,r1/l4,l2/r3}
+\end{tikzpicture}

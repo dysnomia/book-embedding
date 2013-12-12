@@ -1,0 +1,16 @@
+\tikzsetnextfilename{t_pq-all}
+\begin{tikzpicture}
+
+\node (1) {1};
+\node[right of=1] (2) {2};
+\node[right of=2] (p) {};
+\node[below of=p,node distance=1em] (k) {\dots};
+\node[right of=p] (n) {n};
+
+\node[circle, draw, below of=p] (r) {};
+
+\draw (r) edge (1);
+\draw (r) edge (2);
+\draw (r) edge (n);
+
+\end{tikzpicture}

@@ -1,0 +1,88 @@
+\begin{figure}[\placement]
+\centering
+
+\scalebox{0.8}{%
+\begin{tikzpicture}
+
+% abcd
+\begin{scope}
+\node (a) {a};
+\node[right of=a] (b) {b};
+\node[right of=b] (c) {c};
+\node[right of=c] (d) {d};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (b)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(c) + (d)$) + (0, -2em) $) {};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (d.south);
+\draw (c2) edge[bend left] (c1);
+\draw (a) edge [bend left] (b);
+\draw (c) edge [bend left] (d);
+\end{scope}
+
+% bacd
+\begin{scope}[xshift=4cm]
+\node (a) {b};
+\node[right of=a] (b) {a};
+\node[right of=b] (c) {c};
+\node[right of=c] (d) {d};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (b)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(c) + (d)$) + (0, -2em) $) {};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (d.south);
+\draw (c2) edge[bend left] (c1);
+\draw (a) edge [bend left] (b);
+\draw (c) edge [bend left] (d);
+\end{scope}
+
+% abdc
+\begin{scope}[xshift=8cm]
+\node (a) {a};
+\node[right of=a] (b) {b};
+\node[right of=b] (c) {d};
+\node[right of=c] (d) {c};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (b)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(c) + (d)$) + (0, -2em) $) {};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (d.south);
+\draw (c2) edge[bend left] (c1);
+\draw (a) edge [bend left] (b);
+\draw (c) edge [bend left] (d);
+\end{scope}
+
+% badc
+\begin{scope}[xshift=12cm]
+\node (a) {b};
+\node[right of=a] (b) {a};
+\node[right of=b] (c) {d};
+\node[right of=c] (d) {c};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (b)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(c) + (d)$) + (0, -2em) $) {};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (d.south);
+\draw (c2) edge[bend left] (c1);
+\draw (a) edge [bend left] (b);
+\draw (c) edge [bend left] (d);
+\end{scope}
+
+
+\end{tikzpicture}}
+
+\caption[Outside tree orders for $ab||cd$]{The tree orders for $ab||cd$ and $ab$ outside $cd$.}
+\label{figure:topo_ab_cd}
+\end{figure}

@@ -1,0 +1,22 @@
+\tikzsetnextfilename{t_pq-tree}
+\begin{tikzpicture}
+
+\tikzstyle{every path}+=[thick]
+
+\node (1) {1};
+\node[right of=1] (2) {2};
+\node[right of=2] (3) {3};
+\node[right of=3] (4) {4};
+\node[right of=4] (5) {5};
+
+\node[rectangle, draw, below of=3] (t2) {};
+\node[circle, draw, below of=t2] (t1) {};
+
+\draw (t1) edge (1);
+\draw (t1) edge (5);
+\draw (t2) edge (2);
+\draw (t2) edge (3);
+\draw (t2) edge (4);
+\draw (t1) edge (t2);
+
+\end{tikzpicture}

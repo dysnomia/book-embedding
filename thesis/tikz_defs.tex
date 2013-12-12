@@ -1,0 +1,25 @@
+% Tikz options
+\tikzstyle{dashdot}=[dash pattern=on .8pt off 3pt on 4pt off 3pt]
+\tikzstyle{edge1}=[red,dashed]
+\tikzstyle{edge2}=[blue,dotted]
+\tikzstyle{edge3}=[green,dashdot]
+\tikzstyle{every node}+=[inner sep=0.5mm,minimum size=2.00mm,node distance=3em,thick]
+\tikzstyle{every edge}+=[thick]
+\tikzstyle{every arc}+=[thick]
+\tikzstyle{every path}+=[thick]
+\usetikzlibrary{svg.path,calc,decorations.pathreplacing,positioning,backgrounds}
+\newdimen\XCoord
+\newdimen\YCoord
+\newcommand*{\ExtractCoordinate}[1]{\path #1; \pgfgetlastxy{\XCoord}{\YCoord};}%
+
+\newcommand{\drawedges}[2][\empty]{
+	\foreach \a/\b in {#2}{
+		\draw[#1] (\a) edge (\b);
+	}
+}
+
+% Semicircle through a and b
+\newcommand{\semicircle}[2]{%
+  \ExtractCoordinate{($ 0.5*($ (#2.north) - (#1.north) $) $)}
+  \draw[thick] ($ (#2.north) $) arc (0:180:\XCoord);
+}

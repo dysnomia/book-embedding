@@ -1,0 +1,12 @@
+\tikzsetnextfilename{t_total_order}
+\begin{tikzpicture}
+\node (a) {a};
+\node [right of=a] (c) {c};
+\node [right of=c] (b) {b};
+\node [right of=b] (d) {d};
+
+\draw[thick] (2.45,0.2) arc (0:180:1.25);
+\draw[thick] (3.75,0.2) arc (0:180:1.25);
+\draw[edge1] (3.75,0.2) arc (0:180:1.90);
+\drawedges[edge1]{a/c,c/b,b/d} 
+\end{tikzpicture}

@@ -1,0 +1,96 @@
+%%&draft
+\documentclass[a4paper,fontsize=12pt,titlepage,DIV=10,openright,BCOR=1.3cm]{mybook}
+\usepackage{ifdraft}
+
+% Biblatex
+\usepackage[backref,style=numeric,url=false,bibwarn=false, backend=biber,hyperref=true]{biblatex}
+\addbibresource{../../bibliography.bib}
+%\dump
+
+\ifdraft{\includeonly{preliminaries}}{}
+
+% meta data
+\author{Daniel Hoske}
+\title{Book Embedding with Fixed Page Assignments}
+\date{\today}
+\newcommand{\institute}{Institute of Theoretical Computer Science}
+\newcommand{\reviewerone}{Prof.\,Dr. Dorothea Wagner}
+\newcommand{\reviewertwo}{Prof.\,Dr. Peter Sanders}
+\newcommand{\advisorone}{Dr. Ignaz Rutter}
+\newcommand{\advisortwo}{Dipl.-Inform. Thomas Bl\"asius}
+\newcommand{\timestart}{1st June 2012}
+\newcommand{\timeend}{30th September 2012}
+\hypersetup{%
+	pdfkeywords={Book embedding, matchings, PQ-tree, planar, simultaneous embedding},
+}
+
+% Algorithmic problems
+\newcommand{\prob}[1]{\textsc{#1}\xspace}
+\newcommand{\probTwoSat}{\prob{2-sat}}
+\newcommand{\probThreeSat}{\prob{3-sat}}
+\newcommand{\probQTree}{\prob{q-tree-book-embedding}}
+\newcommand{\probPTree}{\prob{p-tree-book-embedding}}
+\newcommand{\probQTreeSat}{\prob{q-tree-2-sat}}
+\newcommand{\probBookNormal}{\prob{not-fixed-book-embedding}}
+\newcommand{\probBook}{\prob{book-embedding}}
+\newcommand{\probBookConnected}{\prob{connected-book-embedding}}
+\newcommand{\probBetween}{\prob{betweenness}}
+\newcommand{\probBookOrder}{\prob{order-book-embedding}}
+\newcommand{\probMatching}{\prob{perfect-matchings-book-embedding}}
+\newcommand{\probNotMatching}{\prob{matchings-book-embedding}}
+\newcommand{\probPQ}{\prob{simultaneous-pq-ordering}}
+\newcommand{\probMul}{\prob{multiple-spine-embedding}}
+\newcommand{\probThreeMatching}{\prob{3-perfect-matchings-book-embedding}}
+
+% List of problems
+\tocnew{lop}
+\tocnew{loa}
+\tocnovspace
+\newcommand{\newProb}[3]{%
+	\addcontentsline{lop}{problem}{\protect\prob{#1}}%
+	\par
+	\textbf{Problem: #1}\\%
+	\emph{Given:} #2\\%
+	%\emph{Answer the question:} #3%
+	\emph{Question:} #3%
+	\par
+}
+
+% Boolean expression
+\newcommand{\mytt}[1]{{\footnotesize \texttt{#1}}}
+\newcommand*\xor{\mathbin{\dot\vee}}
+
+% Abbreviations with correct spaces
+\newcommand{\SEFE}{\prob{sefe}}
+\newcommand{\SEFECON}{\prob{connected-sefe}}
+\newcommand{\PQ}{PQ\xspace}
+\newcommand{\LCA}{LCA\xspace}
+\newcommand{\Q}{Q\xspace}
+\newcommand{\PT}{P\xspace}
+\input{tikz_defs}
+
+% adjustments for weird macro names
+\let\myref\ref
+\let\myproof\proof
+\let\range\interval
+\let\mymod\bmod
+\DeclareMathOperator{\reduce}{reduce}
+
+\begin{document}
+	\selectlanguage{english}
+	
+	\frontmatter
+	\pagenumbering{roman}
+	\include{front}
+	
+	\mainmatter
+	\pagenumbering{arabic}
+	\include{introduction}
+	\include{preliminaries}
+	\include{complexity}
+	\include{special}
+	\include{conclusion}
+		
+	\ifdraft{}{\makebib{heading=bibintoc}}	
+	\include{appendix}
+\end{document}

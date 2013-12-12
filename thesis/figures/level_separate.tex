@@ -1,0 +1,25 @@
+\begin{figure}[\placement]
+\centering
+
+%\resizebox{0.95\textwidth}{!}{
+\begin{tikzpicture}
+
+\node[circle,draw] (r) {};
+\node[circle,draw] (r1) at ($ (r) + (-1.5,-1) $) {};
+\node[circle,draw,right of=r1] (r2) {};
+\node[right of=r2] (r3) {\dots};
+\node[circle,draw,right of=r3] (rn) {};
+
+\node (v1) at ($ (r1) + (0, -1) $) {$V_1$};
+\node (v2) at ($ (r2) + (0, -1) $) {$V_2$};
+\node (vn) at ($ (rn) + (0, -1) $) {$V_n$};
+
+\drawedges{r/r1,r/r2,r/rn,r1/v1}
+
+\end{tikzpicture}
+%}
+
+\caption[Modelling the separation by a \PT-tree]{That the sets~$V_i$ for~$i\in\range{n}$ are separated can be modelled
+by a \PT-tree.}
+\label{figure:level_separate}
+\end{figure}

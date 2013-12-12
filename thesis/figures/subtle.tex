@@ -1,0 +1,31 @@
+\tikzsetnextfilename{t_subtle}
+\begin{tikzpicture}
+
+\path[use as bounding box] (-1,2.5) rectangle (12,-1.0);
+
+\newcommand{\pic}[1]{
+	\node (a) {$a$};
+	\node[above=0.5cm of a, right of=a] (b) {$b$};
+	\node[below=0.5cm of b, right of=b] (c) {$c$};
+	\node[above=0.5cm of c, right of=c] (d) {$d$};
+	\node[below=0.5cm of d, right of=d] (e) {$e$};
+	\node[above=2cm of c] (r) {$r$}; 
+	\node[below=0.5cm of c] (n) {$#1$};
+	
+	\foreach \s/\d in {a/b,b/c,a/c,c/d,d/e,c/e}{
+		\draw (\s) edge (\d);
+	}
+	
+	\foreach \d in {a, b, d, e}{
+		\draw[dashed] (r) edge (\d);
+	}
+}
+
+\pic{abcde}
+\draw[dashed] (r) edge (c);
+
+\begin{scope}[xshift=6cm]
+\pic{cabde}
+\draw[dashed] plot [smooth, tension=2] coordinates {($(r) + (0.2, 0)$) ($ (e) + (1.5, -.75) $) ($ (c) + (0,-.2) $)};
+\end{scope}
+\end{tikzpicture}

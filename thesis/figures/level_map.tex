@@ -1,0 +1,56 @@
+\tikzsetnextfilename{t_level_map}
+\begin{tikzpicture}
+
+%\draw (0, 0) node[left] {} -- (5, 0);
+%\draw (0, -2) node[left] {} -- (5, -2);
+
+%\tikzstyle{every node}+=[circle,draw,fill]
+
+\node (a1) at (1, 0) {$a_1$};
+\node[right of=a1] (a2) {$a_2$};
+\node[right of=a2] (a3) {$a_3$};
+
+\node (b1) at (0.5, -2) {$b_1$};
+\node[right of=b1] (b2) {$b_2$};
+\node[right of=b2] (b3) {$b_3$};
+\node[right of=b3] (b4) {$b_4$};
+
+\node (c1) at (0.5, -4) {$c_1$};
+\node[right of=c1] (c2) {$c_2$};
+\node[right of=c2] (c3) {$c_3$};
+\node[right of=c3] (c4) {$c_4$};
+
+
+\drawedges[bend left]{a1/a2,a1/a3,a2/a3}
+\drawedges{a1/b1,a1/b2,a2/b2,a2/b3,a2/b4}
+\drawedges{c1/b1,c1/b2,c2/b3,c2/b4}
+\drawedges[bend right]{c1/c4,c1/c3}
+
+\node[draw=none,fill=none] at (5.5,-2) {{\Huge $\rightsquigarrow$}};
+
+\begin{scope}[xshift=7cm,yshift=-2cm]
+
+%\draw (-1, 0) -- (9, 0);
+
+\node (a1) at (0, 0) {$a_1$};
+\node[right of=a1] (a2) {$a_2$};
+\node[right of=a2] (a3) {$a_3$};
+
+\node[right of=a3] (b4) {$b_4$};
+\node[right of=b4] (b3) {$b_3$};
+\node[right of=b3] (b2) {$b_2$};
+\node[right of=b2] (b1) {$b_1$};
+
+\node[right of=b1] (c1) {$c_1$};
+\node[right of=c1] (c2) {$c_2$};
+\node[right of=c2] (c3) {$c_3$};
+\node[right of=c3] (c4) {$c_4$};
+
+\drawedges[bend left]{a1/a2,a1/a3,a2/a3}
+\drawedges[bend right]{a1/b1,a1/b2,a2/b2,a2/b3,a2/b4}
+\drawedges[bend right]{c1/b1,c1/b2,c2/b3,c2/b4}
+\drawedges[bend right]{c1/c4,c1/c3}
+
+\end{scope}
+
+\end{tikzpicture}

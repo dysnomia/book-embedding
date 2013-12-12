@@ -1,0 +1,331 @@
+\section{Perfect Matchings}\label{section:matchings}
+
+A diametrically opposed simplification to \myref{section:connected} is to take disjoint
+perfect matchings as graphs on the pages since matchings are---in a sense---the most disconnected graphs apart
+from isolated vertices.
+That is, we least expect to be able to adapt the result for connected graphs to this new setting.
+Note that this is only possible for an even number of vertices and remember that we
+have shown the \NP-completeness when taking (not necessarily perfect) matchings as pages in \myref{section:np-complete}.
+
+\newProb{\probMatching}
+{Disjoint perfect matchings $E_1,\dotsc, E_k$ on a vertex
+set $V$.}{Is there a book embedding of $(V, E_1),\dotsc, (V, E_k)$?}
+
+In this section we first show that an embeddable instance of \probMatching has to be
+\emph{bipartite}, \ie the \emph{union graph}~$(V, E_1\cup\dotsb\cup E_k)$ must be bipartite. Then we prove that the problem does not become trivial for any number~$k$ of pages
+by providing positive and negative bipartite instances.
+For all~$k$ we get a partition of $K_{k,k}$, the complete bipartite graph with $k$~left and $k$~right vertices, as smallest (vertex-minimal) positive bipartite instance and
+for $k > 3$ we get another partition of~$K_{k,k}$ as smallest negative bipartite instance.
+We show this by hand in \myref{subsec:four}. Getting a smallest bipartite counterexample
+for~$k = 3$ is significantly more difficult and we have to resort to using computer assistance in
+\myref{subsec:three}. Even with the computer we only manage to find a smallest
+bipartite counterexample when two of the matchings are required to form a cycle.
+
+\begin{figure}[\placement]\centering
+    \includegraphics[scale=2.0]{figures/t_k4}
+    \caption[$K_4$ is not embeddable]{A non-embeddable partition of $K_4$.}
+    \label{figure:k4}
+\end{figure}
+
+The partition of $K_4$, the complete graph on four~vertices, depicted in \myref{figure:k4} is already a counterexample to \probMatching with three pages.
+This can be checked by hand or by using the corresponding \probThreeSat instance we derived
+in \myref{section:sat}. We observe that the main reason for its non-embeddability is
+the non-bipartiteness of~$K_4$ since bipartiteness is necessary for embeddability,
+as we prove in the following theorem.
+
+\begin{figure}\centering
+    \includegraphics{figures/t_bipartite}
+    \caption[Embeddable perfect matchings have to be bipartite]{There is an even number of vertices between $v$ and each neighbour $n_i(v)$.}
+    \label{figure:bipartite}
+\end{figure}
+
+\begin{theorem}
+\label{lemma:bipartite}
+Let $I := (V, E_1,\dotsc, E_k)$ be an instance of \probMatching. If the graph
+$G := (V, E_1 \cup \dotsb \cup E_k)$ is not bipartite, it has no book embedding.
+\end{theorem}
+\begin{myproof}
+Assume we have a valid book order~$<$ for $G$ and let~$s(v)$ be the index of~$v \in V$,
+\ie $s(v) = j$ if and only if~$v$ is the $j$-th smallest element in~$<$. We show that~$G$
+is bipartite with the bipartitions given by the parity of the index of a vertex,
+\ie $V_E := \bigl\{v \in V\colon \text{$s(v)$ is even}\bigr\}$ and $V_O := V \setminus V_E = \bigl\{v \in V\colon \text{$s(v)$ is odd}\bigr\}$ is a bipartition of~$G$.
+
+Let $i \in \range{k}$.
+Every vertex~$v\in V$ is incident to exactly one edge in each set~$E_i$. 
+We can, therefore, define~$n_i(v)$ to be the unique neighbour of~$v$ in the graph~$(V, E_i)$.
+The neighbour~$n_i(w)$ of a vertex~$w$ between~$n_i(v)$ and~$v$ in the order~$<$ has to
+occur between~$n_i(v)$ and~$v$ since~$<$ fulfils the book constraints. That is,
+the vertices between~$n_i(v)$ and~$v$ appear in pairs. There is, therefore, an even number 
+of vertices between~$n_i(v)$ and~$v$, as depicted in \myref{figure:bipartite}, and the index of~$n_i(v)$ has a different parity than the index of~$v$.
+
+We conclude that~$(V_O, V_E)$ is indeed a bipartition of~$G$ and bipartiteness is, therefore, necessary
+for book embeddability.
+\end{myproof}
+
+\begin{subsection}{Bipartite Examples with at Least Four~Pages}\label{subsec:four}
+
+We know that non-bipartite graphs are not embeddable. But are there also bipartite counterexamples
+for all number of pages, or is the problem the same as testing bipartiteness? (That would be surprising since the slightly more general problem \probNotMatching is \NP-complete for a linear number of pages.) 
+
+At the other extreme, we ask whether there are positive instances
+for all number of pages. The number of edges
+in the whole graph is $(nk)/2$ for~$n$ vertices and $k$~pages. That is, 
+approximately~$k/n$ of the possible edges are present. Therefore,
+the resulting graph cannot be too small and it is not immediately apparent that there
+are positive bipartite instances for large~$k$.
+
+\begin{figure}\centering
+    \includegraphics[width=\textwidth]{figures/t_two_matchings}
+    \caption[One and two matchings]{One matching just consists of independent edges, while two matchings form disjoint cycles.}
+    \label{figure:two_matchings}
+\end{figure}
+
+For one~matching, $G$~is a perfect matching which is obviously embeddable.
+For two~matchings, every vertex of~$G$ has degree~2, \ie $G$ consists of disjoint
+even cycles. Thus, $G$~is embeddable by placing the vertices of the cycles consecutively.
+These cases are illustrated in \myref{figure:two_matchings}.
+
+We now consider the larger cases.
+Our goal is to provide both positive and negative
+bipartite instances for \probMatching and all $k \geq 3$.
+
+In this subsection we give examples for all $k \geq 4$ and
+prove their embeddability or non-embeddability, respectively, by hand.
+We believe that these proofs are vastly more illuminating than
+just using a \SAT solver as a black-box. For the significantly more
+difficult case~$k = 3$ we use computer assistance in the following subsection.
+
+Surprisingly, the smallest bipartite graph~$K_{k,k}$ that can be split
+into~$k$ perfect matchings provides us with both a positive and
+a negative instance; but we still have to choose the perfect matchings sensibly.
+
+Consider the partition of $K_{4,4}$ of \myref{figure:split_k4}.
+It was chosen such that any two matchings form two cycles of length 4. We prove
+that this partition is not embeddable.
+
+\begin{figure}[\placement]\centering
+    \includegraphics{figures/t_split_k4}
+    \caption[$K_{4,4}$ has a non-embeddable partition]{A non-embeddable partition of $K_{4,4}$.}
+    \label{figure:split_k4}
+\end{figure}
+
+\begin{lemma}
+\label{lemma:split_k4}
+The partition of~$K_{4,4}$ given in \myref{figure:split_k4} is not book
+embeddable.
+\end{lemma}
+\begin{myproof}
+We are looking for a valid book order~$<$. From the proof of \myref{lemma:bipartite}
+we get that the left and right vertices have positions of different parity under~$<$.
+Let~$v_i$ be the $i$-th smallest vertex under~$<$ for $i \in \range{8}$. Then $v_1$ is adjacent to $v_2$ and $v_2$ is adjacent to $v_3$ since our graph is $K_{4,4}$ .
+
+For reasons of symmetry, we can, therefore, assume $v_1 = l_1$, $v_2 = r_1$ and $v_3 = l_2$.
+By~\myref{lemma:np-c4} this fixes the order of the vertices of both the black/blue~(solid/dotted)~$C_4$ containing~$l_1$ and the black/green~(solid/dash-dotted)~$C_4$ containing~$r_1$, \ie $l_1 < r_1 < l_3 < r_3$ and $l_1 < r_1 < l_4 < r_4$.
+Since the left and the right vertices alternate, the black/red~(solid/dashed) $C_4$ formed by $\{l_3, r_3, l_4, r_4\}$ now yields $l_3 < r_3 < l_4 < r_4$ or $l_4 < r_4 < l_3 < r_3$. Assume $l_3 < r_3 < l_4 < r_4$
+in the following. The other case can be handled analogously. 
+
+\begin{figure}[\placement]\centering
+    \includegraphics{figures/t_not_embeddable}
+    \caption{Partial embedding of the partition in \myref{figure:split_k4}.}
+    \label{figure:partial_k4}
+\end{figure}
+
+The partial embedding we have so far is depicted in \myref{figure:partial_k4}.	
+We see that the blue (dotted) edge $l_2r_4$ intersects the blue (dotted) edge $r_1l_3$.
+Thus, the graph is not book embeddable.
+
+%The only vertex we still have to place is $r_2$. If $r_2$ were not between $l_2$ and $l_3$, then
+%the red edge $l_1r_2$ would intersect with another red edge. But if $l_2 < r_2 < l_3$, then
+%$l_2r_4$ intersects with $r_2l_4$. 
+\end{myproof}
+
+We can build partitions of $K_{k,k}$ into
+disjoint perfect matchings that contain the non-embeddable partition of~$K_{4,4}$. These partitions
+of~$K_{k,k}$ are then obviously also not embeddable.
+
+The positive instance we are looking for is somewhat harder to find since a graph
+containing a positive instance does not itself have to be book embeddable. That is, we have to
+explicitly give an embedding for every $k \geq 4$ and cannot just prove that some
+graph with $k=4$ is embeddable and extend it to a partition of~$K_{k,k}$ for larger~$k$.
+
+We label the left vertices with~$\{l_0,\dotsc, l_{k-1}\}$ and the right vertices with~$\{r_0,\dotsc, r_{k-1}\}$.
+It then turns out that the \emph{cyclic partition} $E_i := \bigl\{\{l_j, r_{(j + i)\mymod{k}}\}: j \in \range{k-1}\bigr\}$ into matchings is embeddable.
+The case~$k=4$ is illustrated in \myref{figure:cycle_k4}. 
+
+\begin{figure}[\placement]\centering
+    \includegraphics[scale=2.0]{figures/t_cycle_k4}
+    \caption[$K_{4,4}$ has an embeddable partition]{The cyclic partition of $K_{4,4}$ is embeddable.}
+    \label{figure:cycle_k4}
+\end{figure}
+
+\begin{lemma}
+The complete bipartite graph $K_{k,k}$ with the cyclic partition is
+book embeddable.
+\end{lemma}
+\begin{myproof}
+We get a valid order of the vertices by alternatingly listing the right vertices
+in increasing order and the left vertices in decreasing:
+\[
+r_0 < l_{k-1} < r_1 < l_{k-2} < \dotsb < r_{k-1} < l_0\tag{1}
+\]
+In the first matching~$E_0$
+the first vertex~$r_0$ is matched with the last vertex~$l_0$, the
+second vertex~$l_{k-1}$ with the penultimate vertex~$r_{k-1}$, and so on.
+That is, the book constraints of \myref{lemma:constraints} are fulfilled for the page~$E_0$ in the order~(1). More specifically,
+we get concentric semi-circles as canonical embedding in the proof of \myref{lemma:constraints}.
+
+Now let~$i \in \range{k-1}$ and consider the matching~$E_i$. Both~$E_i$ and~$E_0$ are perfect matchings on the vertices of~$K_{k, k}$, \ie they are isomorphic.
+Still, $E_i$ is somewhat harder to understand since it is shifted. To simplify the matching~$E_i$
+we now want to relabel the right vertices~$r_j$ such that~$E_i$ matches $l_j$ to~$r_j$
+for each~$j\in\{0, \dotsc, k-1\}$.  We achieve this by renaming $r_i, \dotsc, r_{k-1}$
+to~$r_0, \dotsc, r_{k-i-1}$ as well as $r_0, \dotsc, r_{i-1}$ to~$r_{k-i}, \dotsc, r_{k-1}$ in this order.
+
+After applying this relabelling to the original order, we get
+\[
+r_{k-i} < l_{k-1} < \dotsb < r_{k-1} < l_{k-i} < r_0 < l_{k-i-1} < \dotsb < r_{k-i-1} < l_0.\tag{2}
+\]
+Since $E_i$ now matches each $l_j$ to~$r_j$, we see that 
+when we cut the vertices between $l_{k-i}$ and~$r_0$,
+we get two independent sets of concentric semi-circles as canonical embedding (\myref{lemma:constraints}) of~$E_i$ in the order~(2) which the same as the order~(1) after a change of name. Thus, the book constraints are fulfilled for the page~$E_i$.\qedhere
+
+%By construction of the order we get
+%\begin{align}
+%l_i < r_j & \Leftrightarrow i + j < n, \tag{1}\\
+%l_i < l_j & \Leftrightarrow i > j, \tag{2}\\
+%r_i < r_j & \Leftrightarrow i < j \tag{3}
+%\end{align}
+%for all~$i, j \in \range{n-1}$.
+%
+%Now take two edges $e_1 := \{i, j\}$ and $e_2 := \{k, s\}$ from the same matching and
+%show the book constraint for them. 
+%
+%We only consider the case $i < j$ and $k < s$ since
+%the other cases are symmetric. As $e_1$ and~$e_2$ are in the same matching,
+%$j - i = s - k$~(4) has to hold.
+%
+%We may again only consider one of the symmetric cases for
+%the book constraints: Assume $l_i < r_s < r_j$ and show $l_i < l_k < r_j$.
+%
+%The assumption $l_i < r_s < r_j$ along with the observations (1) and (3) yields $i + s < n$ and~$s < j$, respectively. With (4) we can infer $k + j = i + s < n$, \ie $l_k < r_j$ by (1).
+%Similarly, $k = s - j + i < j - j + i = i$ and, therefore, (2)~implies $l_i < l_k$. 
+%
+%So the order given above is indeed valid.
+\end{myproof}
+%\input{figures/cycle_k4_proof}
+
+\end{subsection}
+
+\subsection{Bipartite Counterexamples with Three Matchings}\label{subsec:three}
+
+As alluded to above, in this subsection we determine a smallest bipartite counterexample for
+three disjoint perfect matchings when two of the matchings form a cycle. 
+
+We first give the case with three pages a name.
+
+\newProb{\probThreeMatching}
+{Three disjoint perfect matchings $E_1$, $E_2$ and $E_3$ on a vertex
+set $V$.}{Is there a book embedding of $(V, E_1)$, $(V, E_2)$, $(V, E_3)$?}
+
+The smallest possible \probThreeMatching instance~$K_4$ is already a non-bipartite counterexample,
+as shown at the start of this section. In contrast,
+we do not immediately see a bipartite counterexample. In fact, the smallest bipartite counterexample
+has at least 20~vertices, as we see below. It can, therefore, not be viably found without computer assistance.
+In this subsection we describe how we used the computer to do so.
+
+We already know from \myref{section:sat} how a single book embedding instance can be tested using a \SAT-solver. To look for a counterexample, we, naturally, just iterate over all bipartite instances of~\probMatching in increasing (even) order and test them for book embeddability.
+
+\begin{figure}[\placement]
+    \centering
+    \includegraphics{figures/t_bip_cycle}
+    \caption[One cycle consisting of two matchings]{Two matchings form a cycle.}
+    \label{figure:bip_cycle}
+\end{figure}
+    
+This has to be done somewhat intelligently, using the symmetries of the problem, to remain
+in reasonable time. One improvement we use is to utilise multiple cores
+by letting the instance generator and the \SAT-solvers run in parallel. How the
+solver stage can be accelerated by optimising the \SAT-formulae was already discussed in \myref{section:sat}. Below we show
+how to optimise the actual generator. 
+
+Even so, it is still too slow to get the
+smallest bipartite counterexample with the available computing hardware ($4\times12$-Core AMD Opteron 6172, 2.1 GHz, 256 GB RAM). Therefore, we first
+provide the smallest counterexample for an even more restricted instance, namely that two of the matchings
+form a single cycle. It has order~28. We then proceed with the general \probThreeMatching problem
+and compute that there is no bipartite counterexample with~$\leq \text{18}$ vertices.
+
+\paragraph{Two matchings form a cycle}
+
+At the start, we restrict ourselves to instances where two of the matchings 
+form a cycle. Without loss of generality the cycle contains the vertices from~$0$ to~$n - 1$ in order, the first matching is $\bigl\{\{l, (l + 1)\mymod{n}\}\colon l \in \range{n-1}, \text{$l$ even}\bigr\}$ and
+the second is $\bigl\{\{l, (l + 1)\mymod{n}\}\colon l \in \range{n-1}, \text{$l$ odd}\bigr\}$, as depicted in \myref{figure:bip_cycle}. This labelling already fixes the bipartition. The odd vertices
+form the first partition and the even vertices the second. The third matching can then be filled
+using backtracking by successively adding edges that do not already exist between vertices of different parity.
+
+But there is another symmetry we can use, namely the rotational symmetry from \myref{lemma:symmetry}. For this reason, we first define a value for edges that is invariant under
+cyclic shifts and can be interpreted as edge length in the corresponding symmetric order.
+
+\begin{figure}[\placement]
+    \centering
+    \includegraphics{figures/t_bip_length}
+    \caption[Cyclic length of an edge]{The value $\mu(v) = \min\{d_1, d_2\}$ is the length of the edge $\{v, w\}$ in the symmetric order.}
+    \label{figure:bip_length}
+\end{figure}
+  
+\begin{deflemma}
+Let~$<$ be a total order on~$V := \{0, \dotsc, n-1\}$, $E$ a~matching and $v \in V$. Furthermore,
+let~$w$ be the unique neighbour of $v$ in $E$ and $i: V \rightarrow V$ the index function of~$<$.
+
+Then define~$\mu(v) := \min\bigl\{|i(v) - i(w)|, n - |i(v) - i(w)|\bigr\}$. The value~$\mu(v)$ is invariant
+under cyclic shifts of~$<$.
+\end{deflemma}
+\begin{myproof}
+If we consider the symmetric order~$[<]$ corresponding to~$<$, $\mu(v)$~can be interpreted as the length of
+the edge $\{v, w\}$ as in \myref{figure:bip_length}. It is then clearly invariant 
+under cyclic shifts.
+\end{myproof}
+
+We can, therefore, always rotate an instance such that the edge incident to~$0$ in the third
+matching has the largest length~$\mu(\cdot)$. That is, we can first determine the edge incident to~$0$ in the backtracking
+process and need only consider edges with length at most~$\mu(0)$ in the following backtracking steps.
+
+Our implementation of this search strategy yields the graph in \myref{figure:two_cycles}
+as one of the smallest counterexamples. In this example both the red/blue (dashed/dotted) pages
+and the red/black (dashed/solid) pages form cycles.
+There are other non-isomorphic bipartite counterexamples of this size that we do not depict.
+
+Thus, a bipartite counterexample has at 
+least~28 vertices in this special case. It may be possible
+to infer a useful sufficient condition for \probThreeMatching from it. But
+we were unable to do so since the depicted graph is quite large and asymmetric.
+
+\input{figures/two_cycles}
+
+\paragraph{No restrictions}
+
+If we abandon the restriction that two of the matchings form a cycle, we can proceed similarly. 
+Without loss of generality the first matching connects every even vertex to the following odd
+vertex. Then the odd and even vertices form the bipartition. The remaining two matchings
+can then be filled in by backtracking and adding edges between vertices with different parity. By exchanging
+the second and third matching and rotating we can again impose the restriction that~$\mu(0)$
+in the second matching is the maximal value of~$\mu(\cdot)$ in both the second and the third matching.
+
+The search space is significantly larger since we abandoned the restriction that two
+matchings form a cycle. Thus, we were only able to check for counterexamples up to order~18, which already took a week on the available computing hardware ($4\times12$-Core AMD Opteron 6172, 2.1 GHz, 256 GB RAM). %For 20~vertices
+%the program needed too long (TODO, ...). 
+
+We did not find any counterexample with~$\leq 18$ vertices.
+That is, we can only conclude that \probThreeMatching
+has a smallest bipartite counterexample with at least 20~vertices and at most 28~vertices.
+
+\paragraph{Outlook}
+
+It is, therefore, a sensible extension of this work to implement a
+more efficient searcher or just use more computing power to get the
+smallest counterexample of \probThreeMatching. 
+
+Also, the special case \probThreeMatching may already be \NP-complete.
+It may be possible
+to  disprove this by getting a simple decision criterion 
+from the structure of the counterexample in \myref{figure:two_cycles}.
+Inversely, the example may also provide a clue on how to prove the \NP-hardness. This
+direction seems to be quite difficult since we do not really understand why this example is a counterexample.

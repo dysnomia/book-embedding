@@ -1,0 +1,33 @@
+\tikzsetnextfilename{t_split_k4}
+\scalebox{2.0}{%
+\begin{tikzpicture}
+
+\node (l1) {{\relscale{0.5}$l_1$}};
+\node[right of=l1,node distance=6em] (r1) {{\relscale{0.5}$r_1$}};
+\node[below of=l1] (l2) {{\relscale{0.5}$l_2$}};
+\node[right of=l2,node distance=6em] (r2) {{\relscale{0.5}$r_2$}};
+\node[below of=l2] (l3) {{\relscale{0.5}$l_3$}};
+\node[right of=l3,node distance=6em] (r3) {{\relscale{0.5}$r_3$}};
+\node[below of=l3] (l4) {{\relscale{0.5}$l_4$}};
+\node[right of=l4,node distance=6em] (r4) {{\relscale{0.5}$r_4$}};
+
+\draw (l1) edge (r1);
+\draw (l2) edge (r2);
+\draw (l3) edge (r3);
+\draw (l4) edge (r4);
+\draw[edge1] (l1) edge (r2);
+\draw[edge1] (l2) edge (r1);
+\draw[edge1] (l3) edge (r4);
+\draw[edge1] (l4) edge (r3);
+\draw[edge2] (l1) edge (r3);
+\draw[edge2] (l3) edge (r1);
+\draw[edge2] (l2) edge (r4);
+\draw[edge2] (l4) edge (r2);
+\draw[edge3] (l1) edge (r4);
+\draw[edge3] (l4) edge (r1);
+\draw[edge3] (l2) edge (r3);
+\draw[edge3] (l3) edge (r2);
+\end{tikzpicture}}
+
+
+\end{figure}

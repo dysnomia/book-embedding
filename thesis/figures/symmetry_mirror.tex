@@ -1,0 +1,13 @@
+\begin{tikzpicture}
+
+\node (d) {d};
+\node [right of=d] (c) {c};
+\node [right of=c] (b) {b};
+\node [right of=b] (a) {a};
+
+\draw (a) edge [bend right] (c);
+
+\draw[edge1] (a) edge [bend left] (b);
+\draw[edge1] (c) edge [bend left] (d);
+ 
+\end{tikzpicture}

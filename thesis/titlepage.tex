@@ -1,0 +1,76 @@
+%% titlepage.tex
+%%
+
+
+\definecolor{cGray}{rgb}{0.4, 0.4, 0.4} 
+\newcommand*{\inkGray}[1]{\textcolor{cGray}{\scriptsize\textsc{#1}}}
+\newcommand*{\makeSmall}[1]{\footnotesize #1}
+
+\setlength{\TPHorizModule}{1cm}
+\setlength{\TPVertModule}{1cm}
+
+\begin{fullsizetitle}
+
+\changefont{phv}{m}{n}
+%\sffamily
+
+% bg shape
+%\begin{tikzpicture}[overlay]
+%\draw[color=gray]  
+% 		 (\xone mm, \yone mm)
+%  -- (\xtwo mm, \yone mm)
+% arc (90:0:\diameter mm) 
+%  -- (\xtwo mm + \diameter mm , \ytwo mm) 
+%	-- (\xone mm + \diameter mm , \ytwo mm)
+% arc (270:180:\diameter mm)
+%	-- (\xone mm, \yone mm);
+%\end{tikzpicture}
+	\begin{textblock}{4}[0,0](3.0,2.0)
+		\includegraphics[width=4cm]{logos/KITLogo.pdf}
+	\end{textblock}
+        \begin{textblock}{2}[1,0](18.0,2.0)
+		\includegraphics[width=2cm]{logos/algoLogo.pdf}
+	\end{textblock}
+	%\changefont{phv}{m}{n}	% helvetica	
+
+    \begin{textblock}{16.5}[1,0](18.0,6.0)
+	\begin{flushright}
+		\textbf{\Large{\mytitleone}}\\
+		%\Huge{\mytitletwo}
+		\vspace*{0.25cm}
+		\normalsize{
+			Bachelor Thesis of \myname
+		}\\
+		%\vspace*{1cm}
+		%\huge{\myname}\\
+		\vspace*{3cm}
+        \normalsize
+        \begin{flushright}
+			\begin{tabular}[t]{rl}
+	      		\inkGray{Department:} & Department of Informatics \\
+                                      & \myinstitute\\
+	      		\inkGray{Reviewers:} & \reviewerone\\
+                                     & \reviewertwo\\
+	      		\inkGray{Advisors:}  & \myadvisortwo \\
+	      		& \myadvisor \\
+                                    
+                \inkGray{Time period:} & June to September 2012\\
+	      		\inkGray{Last change:} & \today\\
+	    	\end{tabular}
+		\end{flushright}
+	\end{flushright}
+	\end{textblock}
+
+\begin{textblock}{10}[0,0](3,27.7)
+\tiny{ 
+	\iflanguage{english}
+		{KIT -- University of the State of Baden-Wuerttemberg and National Laboratory of the Helmholtz Association}
+		{KIT -- Universität des Landes Baden-Württemberg und nationales Forschungszentrum der Helmholtz-Gesellschaft}
+}
+\end{textblock}
+
+\begin{textblock}{4}[1,0](18.0,27.0)
+\begin{flushright}\large{\textbf{www.kit.edu}}\end{flushright}
+\end{textblock}
+
+\end{fullsizetitle}

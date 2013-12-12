@@ -1,0 +1,147 @@
+\section{Connected Graphs}\label{section:connected}
+
+One approach for solving the book embedding problem is to
+determine the
+set of valid total orders (permutations) for each of the pages and obtain
+the valid book orders by intersecting these sets. Since there are~$n!$ 
+permutations on~$n$ vertices, this method is not efficient and even needs super-polynomial space. Indeed, we have
+shown in the previous chapter that we cannot expect there to be an efficient algorithm.
+
+We know that cyclic shifts and mirror images do not matter. Considering this, 
+we can encode the possible valid orders more efficiently by 
+only storing one symmetric order in place of $2n$ total orders. However, this
+is still not sufficient for efficiently solving the book embedding problem.
+Are there better encodings that make the algorithm
+feasible, at least for special graphs?
+
+As a matter of fact, there are. In this section we see that the valid total orders can be encoded
+very efficiently using \PQ-trees if the pages are connected---the first special case of~\probBook we consider. Furthermore, \PQ-trees on the
+same vertices can also be efficiently \emph{intersected}, \ie we can efficiently 
+get a \PQ-tree representing~$\pi(T_1) \cap \pi(T_2)$ from two \PQ-trees $T_1$ and~$T_2$ on the same leaves.
+
+\newProb{\probBookConnected}{A vertex set~$V$ and edge sets~$E_1,\dotsc,E_k \subseteq \binom{V}{2}$ such
+that the graphs~$(V, E_i)$ are connected for~$i \in \range{k}$.}{Is there
+a book embedding of $(V, E_1),\dotsc, (V,E_k)$?}
+
+%TODO
+%
+%We can reinterpret a \PQ-tree to represent a set of cyclic orders instead of linear order.
+%To do this, add a new root $p$~whose only neighbour is the original root of the tree. In all possibilities
+%for flipping the tree's \PT- and \Q-nodes, define the corresponding circular order as follows: Start at~$p$, go along the
+%linear order of the tree and end at~$p$. If we disregard~$p$ in this order, we get a circular order on
+%the original leaves. That is, we can map a linear order on the
+%leaves to a cyclic order by
+%writing the leaves in the linear order on a cycle.
+%Since, for example, 12345 and~23451 both yield the
+%same cyclic order, this map need not be injective.
+
+\paragraph{Planarity testing using \PQ-trees}
+
+There are several planarity testing algorithms that represent the possible planar
+embeddings using \PQ-trees. A high-level scheme for these methods is
+described by Haeupler and Tarjan~\cite{Haeupler08}. It can be adapted to give
+all valid orders of a page embedding as we show below.
+
+We first briefly describe this scheme. 
+It embeds the graph $G$~vertex by vertex. At each step
+we store the set of possible partial planar embeddings where some subset
+of the vertices has already been embedded. 
+
+The edges that have exactly 
+one embedded endpoint at a step are \emph{half-embedded}. If the non-embedded
+vertices form a connected graph at each step, the half-embedded edges must lie on a common face
+that we can without loss of generality assume to be the outer face, \ie all the already embedded vertices incident to half-embedded edges are on the boundary of the outer face. 
+
+That the non-embedded vertices form a connected graph can be guaranteed
+by choosing a leaf-to-root order in any fixed spanning tree of the connected graph~$G$. The possible
+partial embeddings can then be represented by the order of their half-embedded edges
+around the outside of their component.
+ 
+It can be shown that these orders are given by a \PQ-tree for every component of the subgraph
+induced by the embedded vertices. For a more detailed explanation consult the
+paper by Haeupler and Tarjan~\cite{Haeupler08}. They also show how to implement the
+scheme in linear time.
+
+\paragraph{Representing book embeddings using \PQ-trees}
+
+This is not yet what we want. A page embedding is an outerplanar embedding and not a planar embedding.
+Thus, we have to modify the planarity algorithm slightly. We build the connected graph $\widetilde{G}$ by
+adding a new vertex~$r$ to~$G$ that is adjacent to every vertex in~$V(G)$. In \myref{ch:preliminaries} we noted the
+fact that~$G$ is outerplanar if and only if $\widetilde{G}$ is planar. Furthermore, by removing~$r$
+from a planar embedding of~$\widetilde{G}$ we get an outerplanar embedding of~$G$.
+
+\begin{figure}[\placement]
+    \centering
+    \includegraphics[scale=.9]{figures/t_subtle}
+    \caption[Outerplanar embedding representing different symmetric orders]{The outerplanar embedding  
+    represents the vertex orders in both $[abcde]$ and~$[cabde]$. The symmetric orders $[abcde]$ and~$[cabde]$ correspond to different edge orders around~$r$ in the extended graph.}
+    \label{figure:subtle}
+\end{figure}
+    
+Now we choose~$r$ as last vertex in the leaf-to-root order of the planarity algorithm.
+Since $G$~is connected, the scheme above yields a single \PQ-tree~$T$ representing all
+extendible planar embeddings of~$G$ (as possible orders of the half-embedded edges~$\{r, v\}$ for~$v\in V(G)$)  at its penultimate step. By the argument above, every such embedding
+is outerplanar. Also, $T$~not only gives the orders of the half-embedded edges
+but all vertices of~$G$ since~$r$ is adjacent to every other vertex, \ie every vertex of~$G$ is 
+the endpoint of exactly one half-embedded edge. 
+
+A subtle distinction is still noteworthy, although it does not present any problems
+for the algorithm. When
+walking around the outer boundary of an outerplanar embedding in clockwise or counter-clockwise
+direction, we can meet a vertex twice. Thus, the outerplanar embedding in \myref{figure:subtle},
+for example, can yield the total orders in both $[abcde]$ and~$[cabde]$; yet these orders belong
+to different planar embeddings of the extended graph.
+
+In conclusion, there is a \PQ-tree from which we can read all valid outerplanar embeddings (page embeddings). 
+This \PQ-tree can be computed in linear time as shown by Haeupler and Tarjan~\cite{Haeupler08}.
+%For~$C_4$ this is illustrated in \myref{figure:connected}.
+
+\begin{lemma}\label{lemma:one-page}
+Let~$G = (V, E)$ be a connected graph. Then we can compute a \PQ-tree representing all valid
+orders of the vertices~$V$ in a page embedding of~$G$ in $\OO\bigl(|V|\bigr)$~time.
+\end{lemma}
+
+To get the set of valid book orders, all that remains to be done is to intersect the
+\PQ-trees we get. Say we want to intersect the \PQ-trees~$S$ and~$T$ on the same leaves. Let~$v$
+be an inner node of~$S$ and~$e$ one of its incident edges going to a child~$w$ of~$v$.
+Then the leaves $C(w)$~that have~$w$ as ancestor appear consecutively in any order $\pi \in \pi(S)$.
+Additionally, if~$v$ is a \Q-node and $e'$ is a consecutive edge of~$e$ going from~$v$ to~$w'$, then the
+leaves $C(w) \cup C(w')$ also appear consecutively in any $\pi \in \pi(S)$. On the other hand,
+any order fulfilling these constraints is in~$\pi(S)$. That is, we can get a tree
+representing $\pi(S) \cap \pi(T)$ by applying the reductions just described to the tree~$T$.
+A trivial implementation of this approach would need a quadratic number of reductions, but Booth described in his Ph.\,D. thesis~\cite{Booth75}
+how to reduce the cost of intersection to linear time.
+
+Now that we are able to intersect \PQ-trees, we can summarise the linear-time solution
+of \probBookConnected.
+
+\begin{theorem}
+\probBookConnected can be solved in linear time.
+\label{theorem:connected}
+\end{theorem}
+\begin{myproof}
+Let~$(V, E_1,\dotsc, E_k)$ be the \probBookConnected instance.
+First construct the $k$ \PQ-trees~$T_1,\dotsc, T_k$ representing all valid page
+embeddings of the corresponding graphs~$(V, E_1), \dotsc, (V,E_k)$, each in~$\OO\bigl(|V|\bigr)$. Then consecutively
+intersect $T_1$ with $T_2,\dotsc, T_k$ using time~$\OO\bigl((k - 1)|V|\bigr)$, yielding the
+\PQ-tree~$T$ representing all valid solutions of the instance. The instance
+possesses a solution if and only if~$T \ne \varepsilon$, which can be decided in constant time.
+All in all, we need $\OO\bigl(k|V|\bigr)$~time.
+\end{myproof}
+
+\paragraph{Outlook}
+
+When the graphs on the pages are not connected, we also get \PQ-trees for the valid orders of each of their components. That is, we have a set of \PQ-trees and must decide whether
+they possess a common order in order to solve the book embedding problem. The hurdle is that the trees do not need to have the same leaves. 
+
+Bl\"asius and Rutter~\cite{Blasius11} considered a more general variant of this \PQ-tree intersection problem, called \probPQ. They showed the
+\NP-completeness of \probPQ for an unbounded number of trees. 
+%As noted in \myref{section:np-complete}, we, similarly, only showed that \probBook
+%is \NP-complete when the number of pages is unbounded. 
+Investigating restrictions of \probPQ
+may help us deal with the book embedding problem, but we are not sure how.
+%By the reduction above, we can
+%improve this to a constant number of pages if we manage to prove the \NP-completeness
+%of \probPQ for a constant number of trees. Therefore, investigating \probPQ is one approach for extending
+%our results, but it is---in our opinion---not promising since
+%\probPQ is not a problem of significantly simpler form than \probBook.

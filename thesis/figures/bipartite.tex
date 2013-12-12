@@ -1,0 +1,29 @@
+\tikzsetnextfilename{t_bipartite}
+\begin{figure}[\placement]
+\centering
+
+\begin{tikzpicture}
+\node (v) {v};
+\node[left of=v,node distance=6em] (n1) {$n_1(v)$};
+\node[right of=v,node distance=10em] (n2) {$n_2(v)$};
+\node[right of=n2,node distance=6em] (n3) {$n_k(v)$};
+
+\draw (n1) edge[bend left] node[fill=white] {1} (v);
+\draw (v) edge[bend left] node[fill=white] {2} (n2);
+\draw (v) edge[bend left,out=45,in=135] node[fill=white]{k} (n3);
+
+/* n1 to v */
+\draw[decoration={brace},decorate,thick] ($ (v) + (-1em, -1em) $) -- ($ (n1) + (1.5em,-1em) $);
+\node[text centered] at ($ 0.5*($(n1) + (v)$) + (0.25em, 0)$) {\dots};
+\node[text centered] at ($ 0.5*($(n1) + (v)$) + (0.25em, -2em) $) {even};
+
+/* v to n2 */
+\draw[decoration={brace},decorate,thick] ($ (n2) + (-1.5em, -1em) $) -- ($ (v) + (1em,-1em) $);
+\node[text centered] at ($ 0.5*($(v) + (n2)$) + (-0.25em, 0em)$) {\dots};
+\node[text centered] at ($ 0.5*($(v) + (n2)$) + (-0.25em, -2em) $) {even};
+
+/* v to n3 */
+\draw[decoration={brace},decorate,thick] ($ (n3) + (-1.5em, -3em) $) -- ($ (v) + (1em,-3em) $);
+\node[text centered] at ($ 0.5*($(n3) + (n2)$)$) {\dots};
+\node[text centered] at ($ 0.5*($(n3) + (v)$) + (-0.25em, -4em) $) {even};
+\end{tikzpicture}

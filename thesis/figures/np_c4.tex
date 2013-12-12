@@ -1,0 +1,27 @@
+\tikzsetnextfilename{t_np_c4}
+\begin{tikzpicture}
+
+% a < b < c
+\node (r) {r};
+\node [right of=r] (a) {a};
+\node [right of=a] (b) {b};
+\node [right of=b] (c) {c};
+
+\draw[edge1] (r) edge [bend right] (a);
+\draw[edge1] (b) edge [bend right] (c);
+\draw (a) edge [bend left]  (b);
+\draw(r) edge [bend left]  (c);
+ 
+% a > b > c
+\node [right of=c,distance=3em] (r') {r};
+\node [right of=r'] (c') {c};
+\node [right of=c'] (b') {b};
+\node [right of=b'] (a') {a};
+
+\draw[edge1] (r') edge [bend right] (a');
+\draw[edge1] (c') edge [bend right] (b');
+\draw (b') edge [bend left]  (a');
+\draw (r') edge [bend left]  (c');
+ 
+ 
+\end{tikzpicture}

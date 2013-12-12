@@ -1,0 +1,43 @@
+%% appendix.tex
+%%
+
+%% ==============================
+%\chapter{Appendix}
+%\label{ch:Appendix}
+%% ==============================
+
+\appendix
+
+\renewcommand{\sectionmark}[1]{}
+\renewcommand{\leftmark}{appendix}
+\renewcommand{\rightmark}{appendix}
+%\renewcommand{\sectionmark}[1]{\renewcommand{\rightmark}{\thesection.%\hspace{0.5em}\MakeLowercase{#1}}\renewcommand{\leftmark}{\MakeLowercase{\thesection.\hspace{0.5em}#1}}}
+
+\iflanguage{english}
+{\addchap{Appendix}}	% english style
+{\addchap{Anhang}}	% german style
+
+%\input{prereq.tex}
+%\clearpage
+
+\pagestyle{plain}
+\input{symbols.tex}
+\pagestyle{scrheadings}
+
+{
+%\let\oldchapter\chapter
+%\renewcommand*{\chapter}[2]{\section{#2}}
+\section{List of Figures}
+\listoftoc*{lof}
+\clearpage
+\section{List of Problems}
+\listoftoc*{lop}
+\section{List of Tables}
+\listoftoc*{lot}
+\section{List of Algorithms}
+\listoftoc*{loa}
+\clearpage
+
+%\let\chapter\oldchapter
+}
+

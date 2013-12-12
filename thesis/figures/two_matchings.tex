@@ -1,0 +1,37 @@
+\tikzsetnextfilename{t_two_matchings}
+\begin{tikzpicture}
+
+% 1 matching
+\begin{scope}
+\node (1) {};
+\node [right of=1] (2) {};
+\node [right of=2] (p) {$\dots$};
+\node [right of=p] (n1) {};
+\node [right of=n1] (n) {};
+
+\node at ($ 0.5*($(1) + (n)$) + (0, -3em) $) {1 matching};
+
+\draw (1) edge [bend left] (2);
+\draw (n1) edge [bend left] (n);
+\end{scope}
+
+% 2 matchings 
+\begin{scope}[xshift=15em]
+\node (1) {};
+\node [right of=1] (2) {};
+\node [right of=2] (3) {};
+\node [right of=3] (4) {};
+\node [right of=4] (5) {};
+\node [right of=5] (n) {$\dots$};
+
+\node at ($ 0.5*($(1)  + (n) $) + (0, -3em) $) {2 matchings};
+
+\draw (1) edge [bend left] (2);
+\draw (3) edge [bend left] (4);
+\draw[edge1] (3) edge [bend left] (2);
+\draw[edge1] (4) edge [bend left] (1);
+\draw (5) edge[bend left] ($ (5) + (1em, 1em) $);
+\draw[edge1] (5) edge[bend right] ($ (5) + (3em, -1em) $);
+\end{scope}
+
+\end{tikzpicture}

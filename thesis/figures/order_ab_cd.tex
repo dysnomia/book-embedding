@@ -1,0 +1,96 @@
+\tikzsetnextfilename{t_order_ab_cd}
+\begin{tikzpicture}
+
+% ac || bd, out
+\begin{scope}
+\node (a) {a};
+\node[right of=a] (b) {c};
+\node[right of=b] (c) {b};
+\node[right of=c] (d) {d};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (b)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(c) + (d)$) + (0, -2em) $) {};
+\node[rectangle, draw] (r) at ($ 0.5*($(c1) + (c2)$) + (0, -2em) $) {};
+\node at ($ (r) + (0, -1em) $) {outside 1};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (d.south);
+\draw (r) edge (c1);
+\draw (r) edge (c2);
+\end{scope}
+
+% ac || bd, out right
+\begin{scope}[xshift=5cm]
+\node (a) {a};
+\node[right of=a] (b) {c};
+\node[right of=b] (c) {b};
+\node[right of=c] (d) {d};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (b)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(c) + (d)$) + (0, -4em) $) {};
+\node (r) at ($ 0.5*($(c1) + (c2)$) + (0, -2em) $) {outside 2};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (d.south);
+\draw (c2) edge (c1);
+\end{scope}
+
+% % ac, bd, out left
+\begin{scope}[xshift=10cm]
+\node (a) {a};
+\node[right of=a] (b) {c};
+\node[right of=b] (c) {b};
+\node[right of=c] (d) {d};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (b)$) + (0, -4em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(c) + (d)$) + (0, -2em) $) {};
+\node (r) at ($ 0.5*($(c1) + (c2)$) + (0, -2em) $) {outside 3};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (d.south);
+\draw (c2) edge (c1);
+\end{scope}
+
+% ac || bd
+\begin{scope}[xshift=0cm,yshift=-3cm]
+\node (a) {a};
+\node[right of=a] (b) {b};
+\node[right of=b] (c) {d};
+\node[right of=c] (d) {c};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (d)$) + (0, -4em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(b) + (c)$) + (0, -2em) $) {};
+\node (r) at ($ 0.5*($(c1) + (c2)$) + (0, -2em) $) {inside 1};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (d.south);
+\draw (c2) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (c1);
+\end{scope}
+
+% ad || bc
+\begin{scope}[xshift=5cm,yshift=-3cm]
+\node (a) {b};
+\node[right of=a] (b) {a};
+\node[right of=b] (c) {c};
+\node[right of=c] (d) {d};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (d)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(b) + (c)$) + (0, -4em) $) {};
+\node (r) at ($ 0.5*($(c1) + (c2)$) + (0, -2em) $) {inside 2};
+
+\draw (c1) edge (b.south);
+\draw (c1) edge (c.south);
+\draw (c2) edge (a.south);
+\draw (c2) edge (d.south);
+\draw (c2) edge (c1);
+\end{scope}
+
+\end{tikzpicture}

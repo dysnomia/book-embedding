@@ -1,0 +1,50 @@
+\chapter{Special Cases and Restrictions}
+\label{chapter:special}
+
+Having proven that \probBook is a hard problem in the previous section,
+we now turn to some special instances or variations on \probBook and
+either show how they can be solved efficiently or why they remain hard.
+This section is the main contribution of this thesis.
+
+One topic we are interested in is how embeddability depends
+on the connectivity of the pages. Thus, we deal with both extreme
+cases with regards to connectivity in the first two sections: The pages
+can either all be connected~(\myref{section:connected}), or ``maximally
+disconnected'' without isolated vertices~(\myref{section:matchings}), \ie consisting of perfect disjoint matchings.
+
+We show that the connected case---quite surprisingly---admits a solution
+in linear time.
+For each page we get a \PQ-tree (see \myref{def:pq}) that stands for the
+possible orders of the vertices in a page embedding of this single page.
+The solution intersects these sets of orders to decide embeddability. 
+
+In contrast, we are unable to provide an efficient algorithm if the edges of each
+page form perfect disjoint matchings. We only manage to prove for this
+case that an embeddable graph must be bipartite. Furthermore, we derive---by hand and using a computer---positive bipartite instances and the smallest bipartite counterexamples for all numbers of pages with the
+exception of three pages. For three pages we are able to get a smallest counterexample
+when two of the matchings form a cycle.
+
+Another interesting restriction we make in \myref{section:trees} is to allow the order of the 
+vertices on the spine to only come from the
+permutations represented by a fixed \PQ-tree. We present a quadratic time algorithm
+for solving the book embedding problem with this restriction if we only allow \Q-trees.
+Angelini et.\,al.~\cite{angelini11} showed that a similar restriction is important by reducing \SEFECON~(see page~\pageref{prob:sefecon}) to a book embedding problem
+with 2~pages constrained by a \PT-tree.
+
+Finally, in \myref{section:multi_spine} we give a related 
+variation on the book embedding problem. We now allow multiple spines~(parallel lines) in the plane
+and associate every vertex with a spine the vertex has to be drawn on. 
+Additionally, we demand that edges are drawn between consecutive spines, above the
+topmost spine or below the bottommost spine. We show that this variation is equivalent to
+a special case of the 2-page book embedding problem where the vertex order is constrained
+by a \PT-tree, \ie it is indeed related to the problem
+of \myref{section:trees}.
+
+While the results we present are mostly independent of each other and small, they
+still provide significant insight into the book embedding problem and
+\myref{section:trees} is a step towards solving \prob{sefe}. 
+
+\input{connected}
+\input{matchings}
+\input{trees}
+\input{multi_spine}

@@ -1,0 +1,79 @@
+\section{Basic observations}
+
+\begin{frame}{Total order formulation}
+  Book embedding instance is solvable if and only if\\there is a total order~$<$ on~$V$ (\emph{valid order})
+  without suborder \[a < c < b < d\] 
+  for $\{a, b\}, \{c, d\} \in E_i$ (\emph{book constraint}).
+
+\begin{figure}[\placement]
+\centering
+
+\begin{tikzpicture}
+\node (a) {a};
+\node [right of=a] (c) {c};
+\node [right of=c] (b) {b};
+\node [right of=b] (d) {d};
+
+\drawedges[bend left,out=90,in=90]{a/b,c/d}
+
+\begin{scope}[xshift=12em]
+\node (a) {a};
+\node [right of=a] (c) {c};
+\node [right of=c] (d) {d};
+\node [right of=d] (b) {b};
+
+\drawedges[bend left,out=90,in=90]{a/b,c/d}
+\end{scope}
+\end{tikzpicture}
+
+\end{figure}
+\end{frame}
+
+\begin{frame}{Valid orders}
+
+Mirror image and cyclic shifts of valid order are valid:
+
+\begin{figure}[\placement]
+\centering
+
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}
+\begin{scope}
+\node (a) {a};
+\node [right of=a] (b) {b};
+\node [right of=b] (c) {c};
+\node [right of=c] (d) {d};
+
+\draw (a) edge [bend left] (c);
+
+\draw[edge1] (a) edge [bend right] (b);
+\draw[edge1] (c) edge [bend right] (d);
+\end{scope}
+
+\begin{scope}[xshift=5cm]
+\node (d) {d};
+\node [right of=d] (a) {a};
+\node [right of=a] (b) {b};
+\node [right of=b] (c) {c};
+
+\draw (a) edge [bend left] (c);
+\draw[edge1] (a) edge [bend right] (b);
+\draw[edge1] (d) edge [bend right] (c);
+\end{scope}
+
+\begin{scope}[xshift=10cm]
+\node (d) {d};
+\node [right of=d] (c) {c};
+\node [right of=c] (b) {b};
+\node [right of=b] (a) {a};
+
+\draw (a) edge [bend right] (c);
+
+\draw[edge1] (a) edge [bend left] (b);
+\draw[edge1] (c) edge [bend left] (d);
+
+\end{scope}
+\end{tikzpicture}}
+
+\end{figure}
+\end{frame}

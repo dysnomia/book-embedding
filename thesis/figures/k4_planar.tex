@@ -1,0 +1,51 @@
+\begin{figure}[\placement]
+\newcommand{\mykk}[2]{
+\node[draw,circle] (a#1) {};
+\node[draw,circle,right of=a#1] (b#1) {};
+\node[draw,circle,below of=a#1] (c#1) {};
+\node[draw,circle,right of=c#1] (d#1) {};
+
+\draw[#1] (a#1) edge (b#1);
+\draw[#1] (c#1) edge (d#1);
+\draw[#1] (a#1) edge (c#1);
+\draw[#1] (b#1) edge (d#1);
+\draw[#2] (a#1) edge (d#1);
+\draw[#2,out=90,in=180,min distance=5em] (b#1) edge (c#1);
+}
+
+%\centering
+
+\begin{tikzpicture}
+
+% manual centering
+\begin{scope}{xshift=0em}
+% first row
+\mykk{edge1}{edge1}
+\begin{scope}[xshift=6em]
+\mykk{edge2}{edge2}
+\end{scope}
+\node (dots) at ($ (bedge2) + (3em,-2em) $) {\dots};
+\begin{scope}[xshift=17em]
+\mykk{edge3}{edge3}
+\end{scope}
+\node (t1) at ($ 0.5*($ (cedge1) + (dedge3) $) + (0,-2em) $) {(a)};
+
+% second row
+\begin{scope}[yshift=-9em]
+\mykk{edge1}{edge2}
+\begin{scope}[xshift=6em]
+\mykk{edge1}{edge2}
+\end{scope}
+\node at ($ (dots) + (0em, -9em) $) {\dots};
+\begin{scope}[xshift=17em]
+\mykk{edge1}{edge2}
+\end{scope}
+\node (t2) at ($ (t1) + (0em, -9em) $) {(b)};
+\end{scope}
+\end{scope}
+
+\end{tikzpicture}
+
+\label{figure:k4_planar}
+\caption[$nK_4$ has embeddable and non-embeddable partitions]{The graph $nK_4$ has a partition that is not embeddable into~$n$ pages~(a) and a partition that is embeddable into two pages~(b).}
+\end{figure}

@@ -1,0 +1,16 @@
+\tikzsetnextfilename{t_bip_cycle}
+\begin{tikzpicture}
+
+\node (0) {$1$};
+\node[right of=0] (1) {$1$};
+\node[right of=1] (2) {$2$};
+\node[right of=2,node distance=4em] (p) {\dots};
+\node[right of=p,node distance=4em] (n) {$n - 1$};
+
+\draw (0) edge[bend left] (1);
+\draw[dashed] (1) edge[bend right] (2);
+\draw (2) edge[bend left] ($ (2) + (1.5em, 0.5em)$);
+\draw ($ (n) + (-2.5em, +0.5em) $) edge[bend left] (n.north west);
+\draw[dashed] (0) edge[bend right,out=300,in=240] (n);
+
+\end{tikzpicture}

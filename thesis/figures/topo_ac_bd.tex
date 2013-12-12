@@ -1,0 +1,170 @@
+\tikzsetnextfilename{t_topo_ac_bd}
+\begin{tikzpicture}
+
+% acbd
+\begin{scope}
+\node (a) {a};
+\node[right of=a] (b) {c};
+\node[right of=b] (c) {b};
+\node[right of=c] (d) {d};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (b)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(c) + (d)$) + (0, -2em) $) {};
+\node[rectangle, draw] (r) at ($ 0.5*($(c1) + (c2)$) + (0, -2em) $) {};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (d.south);
+\draw (c1) edge (r);
+\draw (c2) edge (r);
+\draw (a) edge [bend left] (c);
+\draw (b) edge [bend left] (d);
+\end{scope}
+
+% cabd
+\begin{scope}[xshift=5cm]
+\node (a) {a};
+\node[right of=a] (b) {c};
+\node[right of=b] (c) {d};
+\node[right of=c] (d) {b};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (b)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(c) + (d)$) + (0, -2em) $) {};
+\node[rectangle, draw] (r) at ($ 0.5*($(c1) + (c2)$) + (0, -2em) $) {};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (d.south);
+\draw (c1) edge (r);
+\draw (c2) edge (r);
+\draw (a) edge [bend left] (d);
+\draw (b) edge [bend left] (c);
+\end{scope}
+
+% acdb
+\begin{scope}[xshift=10cm]
+\node (a) {c};
+\node[right of=a] (b) {a};
+\node[right of=b] (c) {b};
+\node[right of=c] (d) {d};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (b)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(c) + (d)$) + (0, -2em) $) {};
+\node[rectangle, draw] (r) at ($ 0.5*($(c1) + (c2)$) + (0, -2em) $) {};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (d.south);
+\draw (c1) edge (r);
+\draw (c2) edge (r);
+\draw (a) edge [bend left] (d);
+\draw (b) edge [bend left] (c);
+\end{scope}
+
+% cadb
+\begin{scope}[xshift=15cm]
+\node (a) {c};
+\node[right of=a] (b) {a};
+\node[right of=b] (c) {d};
+\node[right of=c] (d) {b};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (b)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(c) + (d)$) + (0, -2em) $) {};
+\node[rectangle, draw] (r) at ($ 0.5*($(c1) + (c2)$) + (0, -2em) $) {};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (d.south);
+\draw (c1) edge (r);
+\draw (c2) edge (r);
+\draw (a) edge [bend left] (c);
+\draw (b) edge [bend left] (d);
+\end{scope}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Line 2
+\begin{scope}[yshift=-3.0cm]
+\node (a) {b};
+\node[right of=a] (b) {d};
+\node[right of=b] (c) {a};
+\node[right of=c] (d) {c};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (b)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(c) + (d)$) + (0, -2em) $) {};
+\node[rectangle, draw] (r) at ($ 0.5*($(c1) + (c2)$) + (0, -2em) $) {};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (d.south);
+\draw (c1) edge (r);
+\draw (c2) edge (r);
+\draw (a) edge [bend left] (c);
+\draw (b) edge [bend left] (d);
+\end{scope}
+
+\begin{scope}[xshift=5cm,yshift=-3.0cm]
+\node (a) {b};
+\node[right of=a] (b) {d};
+\node[right of=b] (c) {c};
+\node[right of=c] (d) {a};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (b)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(c) + (d)$) + (0, -2em) $) {};
+\node[rectangle, draw] (r) at ($ 0.5*($(c1) + (c2)$) + (0, -2em) $) {};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (d.south);
+\draw (c1) edge (r);
+\draw (c2) edge (r);
+\draw (a) edge [bend left] (d);
+\draw (b) edge [bend left] (c);
+\end{scope}
+
+% acdb
+\begin{scope}[xshift=10cm,yshift=-3.0cm]
+\node (a) {d};
+\node[right of=a] (b) {b};
+\node[right of=b] (c) {a};
+\node[right of=c] (d) {c};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (b)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(c) + (d)$) + (0, -2em) $) {};
+\node[rectangle, draw] (r) at ($ 0.5*($(c1) + (c2)$) + (0, -2em) $) {};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (d.south);
+\draw (c1) edge (r);
+\draw (c2) edge (r);
+\draw (a) edge [bend left] (d);
+\draw (b) edge [bend left] (c);
+\end{scope}
+
+% cadb
+\begin{scope}[xshift=15cm,yshift=-3.0cm]
+\node (a) {d};
+\node[right of=a] (b) {b};
+\node[right of=b] (c) {c};
+\node[right of=c] (d) {a};
+
+\node[rectangle, draw] (c1) at ($ 0.5*($(a) + (b)$) + (0, -2em) $) {};
+\node[rectangle, draw] (c2) at ($ 0.5*($(c) + (d)$) + (0, -2em) $) {};
+\node[rectangle, draw] (r) at ($ 0.5*($(c1) + (c2)$) + (0, -2em) $) {};
+
+\draw (c1) edge (a.south);
+\draw (c1) edge (b.south);
+\draw (c2) edge (c.south);
+\draw (c2) edge (d.south);
+\draw (c1) edge (r);
+\draw (c2) edge (r);
+\draw (a) edge [bend left] (c);
+\draw (b) edge [bend left] (d);
+\end{scope}
+\end{tikzpicture}

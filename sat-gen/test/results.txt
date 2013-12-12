@@ -1,0 +1,49 @@
+One cycle:
+  6:  no
+  8:  no
+  10: no
+  12: no
+  14: no
+  16: no
+  18: no
+  20: no
+  22: no
+  24: 
+  26: 
+  28: Found counterexamples
+  
+Two cycles:
+  6:  no
+  8:  no
+  10: no
+  12: no
+  14: no
+  16: no
+  18: no
+  20: no
+  22: no
+  24: 
+  26: 
+  28: Found counterexamples
+  
+No cycles:
+  8:  no
+  10: no
+  12: no
+  14: no
+  16: 
+  18:
+  
+4 Matchings:
+  K4_4_1_1 is a counterexample
+  K4_4_1_2 and K4_4_2_2 are not
+  
+Kn_n with cyclic matchings:
+  4: no
+  5: no
+  6: no
+  7: no
+  8: no
+  9: no
+  10: no
+  11: ..., is always possible (provable)

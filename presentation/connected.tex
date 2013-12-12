@@ -1,0 +1,86 @@
+\section{Connected pages}
+
+\begin{frame}[fragile]{Linear-time decision}
+
+\begin{theorem}
+\probBook with connected pages can be solved in $\OO(n)$~time.
+\end{theorem}
+
+\begin{overprint}
+\onslide<1>
+\begin{itemize}
+\item Construct \PQ-trees $T_i$ on~$V$ representing valid orders of individual pages
+$(V,E_i)$
+\begin{figure}
+\centering
+\resizebox{0.8\textwidth}{!}{
+\begin{tikzpicture}
+\path[use as bounding box] (-2,2) rectangle (8,-2.5);
+
+\tikzstyle{every node}+=[minimum size=0.5cm,thick]
+\tikzstyle{every path}+=[thick]
+
+\node[] (a) {$a$};
+\node[right of=a] (b) {$b$};
+\node[below of=b] (c) {$c$};
+\node[left of=c] (d) {$d$};
+
+\draw (a) edge (b) 
+      (b) edge (c) 
+      (c) edge (d) 
+      (d) edge (a);
+\end{tikzpicture}}
+\end{figure}
+\end{itemize}
+
+\onslide<2>
+
+\begin{itemize}
+\item Construct \PQ-trees $T_i$ on~$V$ representing valid orders of individual pages
+$(V,E_i)$
+\begin{figure}
+\centering
+\resizebox{0.8\textwidth}{!}{
+\begin{tikzpicture}
+\path[use as bounding box] (-2,2) rectangle (8,-2.5);
+
+\tikzstyle{every node}+=[minimum size=0.5cm,thick]
+\tikzstyle{every path}+=[thick]
+
+\node[] (a) {$a$};
+\node[right of=a] (b) {$b$};
+\node[below of=b] (c) {$c$};
+\node[left of=c] (d) {$d$};
+\node[left of=a, above of=a] (r) {$r$};
+
+\draw (a) edge (b) 
+      (b) edge (c) 
+      (c) edge (d) 
+      (d) edge (a);
+\draw[dashed] (r) edge (a)
+              (r) edge (b)
+              (r) edge (d)
+              (r) edge[out=270, in=270, min distance=6em] (c);
+
+% PQ-tree
+\begin{scope}[xshift=5cm]
+\node[draw,rectangle,minimum size=.2cm] {}
+   child {node {$a$}}
+   child {node {$b$}}
+   child {node {$c$}}
+   child {node {$d$}};
+\end{scope}
+\end{tikzpicture}}
+\end{figure}
+\end{itemize}
+
+\onslide<3>
+\begin{itemize}
+\item Construct \PQ-trees $T_i$ on~$V$ representing valid orders of individual pages
+$(V,E_i)$
+\item Intersect the $T_i$ [Booth, 1975]
+\item[$\rightarrow$] Resulting \PQ-tree~$T$ represents valid book orders
+\end{itemize}
+\end{overprint}
+
+\end{frame}

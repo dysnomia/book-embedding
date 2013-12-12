@@ -1,0 +1,15 @@
+\tikzsetnextfilename{t_page_c3}
+\begin{tikzpicture}
+
+\draw[->,thin] (-1em,0) -- ++(9em, 0) node [right] {x};
+\draw[->,thin] (-1em,0) -- ++(0,9em)  node [above] {y};
+
+\node[fill=white] (1) {a};
+\node[fill=white,right of=1] (2) {b};
+\node[fill=white,right of=2] (3) {c};
+
+\draw (1) edge [bend left] (2);
+\draw (2) edge [bend left] (3);
+\draw (1) edge [bend left] (3);
+ 
+\end{tikzpicture}

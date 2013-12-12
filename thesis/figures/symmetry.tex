@@ -1,0 +1,42 @@
+\tikzsetnextfilename{t_symmetry}
+\begin{tikzpicture}
+\begin{scope}
+\node (a) {a};
+\node [right of=a] (b) {b};
+\node [right of=b] (c) {c};
+\node [right of=c] (d) {d};
+
+\draw (a) edge [bend left] (c);
+
+\draw[edge1] (a) edge [bend right] (b);
+\draw[edge1] (c) edge [bend right] (d);
+
+\node at ($ 0.5*($ (a) + (d) $) + (0,-1cm) $) {(a)};
+\end{scope}
+
+\begin{scope}[xshift=5cm]
+\node (d) {d};
+\node [right of=d] (a) {a};
+\node [right of=a] (b) {b};
+\node [right of=b] (c) {c};
+
+\draw (a) edge [bend left] (c);
+\draw[edge1] (a) edge [bend right] (b);
+\draw[edge1] (d) edge [bend right] (c);
+ 
+\node at ($ 0.5*($ (d) + (c) $) + (0,-1cm) $) {(b)};
+\end{scope}
+
+\begin{scope}[xshift=10cm]
+\node (d) {d};
+\node [right of=d] (c) {c};
+\node [right of=c] (b) {b};
+\node [right of=b] (a) {a};
+
+\draw (a) edge [bend right] (c);
+
+\draw[edge1] (a) edge [bend left] (b);
+\draw[edge1] (c) edge [bend left] (d);
+\node at ($ 0.5*($ (d) + (a) $) + (0,-1cm) $) {(c)};
+\end{scope}
+\end{tikzpicture}

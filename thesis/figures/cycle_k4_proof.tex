@@ -1,0 +1,25 @@
+\begin{figure}[\placement]
+\centering
+
+\begin{tikzpicture}
+\node (r0) {$r_0$};
+\node[right of=r0] (lnm) {$l_{n-1}$};
+\node[right of=r1] (p) {$\dots$};
+\node[right of=p] (rnmmm) {$r_{n - 3}$};
+\node[right of=rnmmm] (l2) {$l_2$};
+\node[right of=l2] (rnmm) {$r_{n - 2}$};
+\node[right of=rnmm] (l1) {$l_1$};
+\node[right of=l1] (rnm) {$r_{n - 1}$};
+\node[right of=rnm] (l0) {$l_0$};
+
+\semicircle{r0}{l2};
+\semicircle{lnm}{rnmmm};
+\semicircle{rnmm}{l1};
+\semicircle{rnm}{l0};
+
+\end{tikzpicture}
+
+\label{figure:cycle_k4_proof}
+\caption[Cyclic embedding has concentric semi-circles]{The embedding for the cyclic partition consists of sets of concentric semi-circles
+for each matching. The matching $E_2$ is drawn.}
+\end{figure}

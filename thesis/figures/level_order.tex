@@ -1,0 +1,22 @@
+\tikzsetnextfilename{t_level_order}
+\begin{tikzpicture}
+
+%\tikzstyle{every node}+=[circle,draw]
+
+\node (A1) {$a_1$};
+\node[right of=A1] (A2) {$a_2$};
+\node[below of=A1] (B2) {$b_2$};
+\node[right of=B2] (B1) {$b_1$};
+\draw (A1) edge (B1);
+\draw (A2) edge (B2);
+
+\begin{scope}[xshift=4cm]
+\node (A1) {$a_1$};
+\node[right of=A1] (A2) {$a_2$};
+\node[below of=A1] (B1) {$b_1$};
+\node[right of=B1] (B2) {$b_2$};
+\draw (A1) edge (B1);
+\draw (A2) edge (B2);
+\end{scope}
+
+\end{tikzpicture}
